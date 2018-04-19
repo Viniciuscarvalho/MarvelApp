@@ -56,6 +56,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F031FBC2088D4B400824197 /* HeroesDetail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HeroesDetail;
+			sourceTree = "<group>";
+		};
+		2F031FBD2088D4B400824197 /* HeroesList */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HeroesList;
+			sourceTree = "<group>";
+		};
+		2F031FBE2088D6D000824197 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		2F031FBF2088D6D000824197 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2F031FC02088D6D000824197 /* Essentials */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Essentials;
+			sourceTree = "<group>";
+		};
+		2F031FC12088D6D000824197 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		EA7B3FFD2088122F007BD37B = {
 			isa = PBXGroup;
 			children = (
@@ -77,8 +119,8 @@
 		EA7B40082088122F007BD37B /* MarvelApp */ = {
 			isa = PBXGroup;
 			children = (
-				EA7B4037208818B9007BD37B /* HeroesList */,
-				EA7B4036208818A7007BD37B /* HeroesDetail */,
+				2F031FBC2088D4B400824197 /* HeroesDetail */,
+				2F031FBD2088D4B400824197 /* HeroesList */,
 				EA7B402E20881733007BD37B /* Storyboard */,
 				EA7B402D20881268007BD37B /* Core */,
 				EA7B402C20881261007BD37B /* Shared */,
@@ -98,10 +140,10 @@
 		EA7B402C20881261007BD37B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				EA7B403820881976007BD37B /* Views */,
-				EA7B402F2088174C007BD37B /* Network */,
-				EA7B403220881772007BD37B /* Helpers */,
-				EA7B40312088175A007BD37B /* Essentials */,
+				2F031FC12088D6D000824197 /* Network */,
+				2F031FC02088D6D000824197 /* Essentials */,
+				2F031FBE2088D6D000824197 /* Helpers */,
+				2F031FBF2088D6D000824197 /* Views */,
 				EA7B403020881754007BD37B /* Extensions */,
 			);
 			path = Shared;
@@ -127,13 +169,6 @@
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
-		EA7B402F2088174C007BD37B /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		EA7B403020881754007BD37B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,20 +177,6 @@
 				EA7B40092088122F007BD37B /* AppDelegate.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		EA7B40312088175A007BD37B /* Essentials */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Essentials;
-			sourceTree = "<group>";
-		};
-		EA7B403220881772007BD37B /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		EA7B4033208817A4007BD37B /* Managers */ = {
@@ -177,27 +198,6 @@
 			children = (
 			);
 			path = Entities;
-			sourceTree = "<group>";
-		};
-		EA7B4036208818A7007BD37B /* HeroesDetail */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HeroesDetail;
-			sourceTree = "<group>";
-		};
-		EA7B4037208818B9007BD37B /* HeroesList */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HeroesList;
-			sourceTree = "<group>";
-		};
-		EA7B403820881976007BD37B /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
