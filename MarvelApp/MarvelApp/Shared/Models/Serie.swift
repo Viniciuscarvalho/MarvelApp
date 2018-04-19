@@ -8,10 +8,10 @@
 
 import Foundation
 
-class Serie: Codable, ResourceURI {
+class Serie: ResourceURI {
     
-    let resourceURI: String
-    let name: String?
+    var resourceURI: String!
+    var name: String?
     var id: Int?
     var title: String?
     var description: String?

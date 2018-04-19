@@ -8,10 +8,9 @@
 
 import Foundation
 
-class Story: Codable, ResourceURI {
-    
-    let resourceURI : String
-    let name : String?
+class Story: ResourceURI {
+    var resourceURI : String!
+    var name : String?
     var id: Int?
     var title: String?
     var description: String?

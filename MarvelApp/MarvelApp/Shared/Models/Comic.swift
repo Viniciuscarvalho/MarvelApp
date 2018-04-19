@@ -8,10 +8,10 @@
 
 import Foundation
 
-class Comic: Codable, ResourceURI {
+class Comic: ResourceURI {
     
-    let resourceURI: String
-    let name: String?
+    var resourceURI: String!
+    var name: String?
     var id: Int?
     var digitalId: Int?
     var title: String?

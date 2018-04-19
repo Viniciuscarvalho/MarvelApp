@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ResourceURI: Codable, AnyObject {
-    var resourceURI: String { get }
+    var resourceURI: String! { get }
     func isLoaded() -> Bool
     func populate(item: Self)
 }
