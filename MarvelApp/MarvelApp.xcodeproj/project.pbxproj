@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F2170FB2088FB2200E799BF /* MarvelApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F2170F92088FB2200E799BF /* MarvelApp.xcdatamodeld */; };
 		EA7B400A2088122F007BD37B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7B40092088122F007BD37B /* AppDelegate.swift */; };
 		EA7B400F2088122F007BD37B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA7B400D2088122F007BD37B /* Main.storyboard */; };
-		EA7B40122088122F007BD37B /* MarvelApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EA7B40102088122F007BD37B /* MarvelApp.xcdatamodeld */; };
 		EA7B401420881233007BD37B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA7B401320881233007BD37B /* Assets.xcassets */; };
 		EA7B401720881233007BD37B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA7B401520881233007BD37B /* LaunchScreen.storyboard */; };
 		EA7B402220881233007BD37B /* MarvelAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7B402120881233007BD37B /* MarvelAppTests.swift */; };
@@ -26,10 +26,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F2170FA2088FB2200E799BF /* MarvelApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MarvelApp.xcdatamodel; sourceTree = "<group>"; };
 		EA7B40062088122F007BD37B /* MarvelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA7B40092088122F007BD37B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA7B400E2088122F007BD37B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EA7B40112088122F007BD37B /* MarvelApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MarvelApp.xcdatamodel; sourceTree = "<group>"; };
 		EA7B401320881233007BD37B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA7B401620881233007BD37B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA7B401820881233007BD37B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,6 +98,38 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		2F2170F52088FA9D00E799BF /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				2F2170F92088FB2200E799BF /* MarvelApp.xcdatamodeld */,
+				2F2170F82088FAB000E799BF /* Helpers */,
+				2F2170F72088FAAA00E799BF /* Managers */,
+				2F2170F62088FAA500E799BF /* Entities */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		2F2170F62088FAA500E799BF /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		2F2170F72088FAAA00E799BF /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		2F2170F82088FAB000E799BF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		EA7B3FFD2088122F007BD37B = {
 			isa = PBXGroup;
 			children = (
@@ -119,10 +151,10 @@
 		EA7B40082088122F007BD37B /* MarvelApp */ = {
 			isa = PBXGroup;
 			children = (
-				2F031FBC2088D4B400824197 /* HeroesDetail */,
 				2F031FBD2088D4B400824197 /* HeroesList */,
+				2F031FBC2088D4B400824197 /* HeroesDetail */,
+				2F2170F52088FA9D00E799BF /* Core */,
 				EA7B402E20881733007BD37B /* Storyboard */,
-				EA7B402D20881268007BD37B /* Core */,
 				EA7B402C20881261007BD37B /* Shared */,
 			);
 			path = MarvelApp;
@@ -149,17 +181,6 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		EA7B402D20881268007BD37B /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				EA7B4035208817C7007BD37B /* Entities */,
-				EA7B4034208817BA007BD37B /* Helpers */,
-				EA7B4033208817A4007BD37B /* Managers */,
-				EA7B40102088122F007BD37B /* MarvelApp.xcdatamodeld */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
 		EA7B402E20881733007BD37B /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,27 +198,6 @@
 				EA7B40092088122F007BD37B /* AppDelegate.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		EA7B4033208817A4007BD37B /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Managers;
-			sourceTree = "<group>";
-		};
-		EA7B4034208817BA007BD37B /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		EA7B4035208817C7007BD37B /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,7 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA7B40122088122F007BD37B /* MarvelApp.xcdatamodeld in Sources */,
+				2F2170FB2088FB2200E799BF /* MarvelApp.xcdatamodeld in Sources */,
 				EA7B400A2088122F007BD37B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -569,12 +569,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		EA7B40102088122F007BD37B /* MarvelApp.xcdatamodeld */ = {
+		2F2170F92088FB2200E799BF /* MarvelApp.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				EA7B40112088122F007BD37B /* MarvelApp.xcdatamodel */,
+				2F2170FA2088FB2200E799BF /* MarvelApp.xcdatamodel */,
 			);
-			currentVersion = EA7B40112088122F007BD37B /* MarvelApp.xcdatamodel */;
+			currentVersion = 2F2170FA2088FB2200E799BF /* MarvelApp.xcdatamodel */;
 			path = MarvelApp.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
