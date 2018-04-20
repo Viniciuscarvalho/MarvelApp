@@ -24,6 +24,9 @@
 		2F21712120893E9200E799BF /* ResourceURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F21712020893E9200E799BF /* ResourceURI.swift */; };
 		2F217123208940CF00E799BF /* PayloadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F217122208940CF00E799BF /* PayloadRequest.swift */; };
 		2F217126208A2A7F00E799BF /* CharacterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F217125208A2A7F00E799BF /* CharacterManager.swift */; };
+		2F217128208A732500E799BF /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F217127208A732500E799BF /* Assets.swift */; };
+		2F217132208A897E00E799BF /* HeroesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F217131208A897E00E799BF /* HeroesDetailViewController.swift */; };
+		2F217136208A8CB200E799BF /* HeroesDetailDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F217135208A8CB200E799BF /* HeroesDetailDatasource.swift */; };
 		EA7B400A2088122F007BD37B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7B40092088122F007BD37B /* AppDelegate.swift */; };
 		EA7B400F2088122F007BD37B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA7B400D2088122F007BD37B /* Main.storyboard */; };
 		EA7B401420881233007BD37B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA7B401320881233007BD37B /* Assets.xcassets */; };
@@ -60,6 +63,9 @@
 		2F21712020893E9200E799BF /* ResourceURI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceURI.swift; sourceTree = "<group>"; };
 		2F217122208940CF00E799BF /* PayloadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayloadRequest.swift; sourceTree = "<group>"; };
 		2F217125208A2A7F00E799BF /* CharacterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterManager.swift; sourceTree = "<group>"; };
+		2F217127208A732500E799BF /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		2F217131208A897E00E799BF /* HeroesDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroesDetailViewController.swift; sourceTree = "<group>"; };
+		2F217135208A8CB200E799BF /* HeroesDetailDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroesDetailDatasource.swift; sourceTree = "<group>"; };
 		EA7B40062088122F007BD37B /* MarvelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA7B40092088122F007BD37B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA7B400E2088122F007BD37B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -92,6 +98,8 @@
 		2F031FBC2088D4B400824197 /* HeroesDetail */ = {
 			isa = PBXGroup;
 			children = (
+				2F217134208A8C9800E799BF /* DataSources */,
+				2F21712D208A860400E799BF /* ViewControllers */,
 			);
 			path = HeroesDetail;
 			sourceTree = "<group>";
@@ -221,6 +229,22 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		2F21712D208A860400E799BF /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2F217131208A897E00E799BF /* HeroesDetailViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2F217134208A8C9800E799BF /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				2F217135208A8CB200E799BF /* HeroesDetailDatasource.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
 		EA7B3FFD2088122F007BD37B = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +310,7 @@
 		EA7B403020881754007BD37B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2F217127208A732500E799BF /* Assets.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -400,7 +425,10 @@
 				2F217126208A2A7F00E799BF /* CharacterManager.swift in Sources */,
 				2F2170FB2088FB2200E799BF /* MarvelApp.xcdatamodeld in Sources */,
 				2F21711120890DFD00E799BF /* Event.swift in Sources */,
+				2F217136208A8CB200E799BF /* HeroesDetailDatasource.swift in Sources */,
 				2F2171032089018600E799BF /* HeroesCollectionViewCell.swift in Sources */,
+				2F217132208A897E00E799BF /* HeroesDetailViewController.swift in Sources */,
+				2F217128208A732500E799BF /* Assets.swift in Sources */,
 				2F21711520892B5200E799BF /* Result.swift in Sources */,
 				2F21710F20890DF300E799BF /* Serie.swift in Sources */,
 				2F21712120893E9200E799BF /* ResourceURI.swift in Sources */,

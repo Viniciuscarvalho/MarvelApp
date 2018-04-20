@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="215" height="285"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JY5-Kc-3yq">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash" translatesAutoresizingMaskIntoConstraints="NO" id="JY5-Kc-3yq">
                         <rect key="frame" x="0.0" y="0.0" width="215" height="236"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uu0-35-8W7">
@@ -65,10 +65,16 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="215" height="259"/>
-            <point key="canvasLocation" x="-95.5" y="-11.5"/>
+            <connections>
+                <outlet property="favoriteIcon" destination="MJm-kc-I86" id="RhP-Dd-LN8"/>
+                <outlet property="heroesTitle" destination="Gvs-b2-V4V" id="F95-Am-Sqk"/>
+                <outlet property="imageView" destination="JY5-Kc-3yq" id="yqB-aC-xsa"/>
+            </connections>
+            <point key="canvasLocation" x="-172" y="-1"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="Splash" width="1125" height="2001"/>
         <image name="favorite_gray_icon" width="17" height="16"/>
     </resources>
 </document>
