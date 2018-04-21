@@ -18,6 +18,9 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <connections>
+                        <segue destination="xX1-d2-G1U" kind="relationship" relationship="rootViewController" id="Nxo-gp-noE"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2ro-Y4-yCi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -32,7 +35,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dTh-jE-Erc">
-                                <rect key="frame" x="0.0" y="76" width="375" height="591"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oxZ-3g-vRT">
                                     <size key="itemSize" width="175" height="175"/>
@@ -41,13 +44,16 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="f2g-Kx-5mL">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="f2g-Kx-5mL" customClass="HeroesCollectionViewCell" customModule="MarvelApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="175" height="175"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="175" height="175"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
+                                        <connections>
+                                            <segue destination="H1R-8a-V23" kind="show" id="DSU-K8-yut"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -56,8 +62,11 @@
                                 </connections>
                             </collectionView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Zdm-ns-iC1">
-                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="xX1-d2-G1U" id="KF6-ZO-dSo"/>
+                                </connections>
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -72,6 +81,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m1x-2p-ceu"/>
                     </view>
+                    <navigationItem key="navigationItem" id="t8Q-7L-P9D"/>
                     <connections>
                         <outlet property="collectionView" destination="dTh-jE-Erc" id="QpB-CI-e2n"/>
                     </connections>
@@ -80,16 +90,16 @@
             </objects>
             <point key="canvasLocation" x="397.60000000000002" y="130.88455772113943"/>
         </scene>
-        <!--View Controller-->
+        <!--Heroes Detail View Controller-->
         <scene sceneID="Mjb-mo-DpV">
             <objects>
-                <viewController id="H1R-8a-V23" sceneMemberID="viewController">
+                <viewController id="H1R-8a-V23" customClass="HeroesDetailViewController" customModule="MarvelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WIm-4l-UwR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-all" translatesAutoresizingMaskIntoConstraints="NO" id="ooI-h2-pB1">
-                                <rect key="frame" x="0.0" y="20" width="375" height="500"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="500"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="500" id="OsS-Rj-glb"/>
                                     <constraint firstAttribute="width" constant="375" id="ctA-ms-iTZ"/>

@@ -34,6 +34,8 @@ class HeroesViewController: UIViewController {
                 self.loadingView.stop()
             case .errorLoadCharacters:
                 self.loadingView.stop()
+            case .noShowSearchResults:
+                self.loadingView.stop()
             }
         }
     }
@@ -64,7 +66,7 @@ class HeroesViewController: UIViewController {
     }
     
     @objc func handleItemSelection() {
-        if let movie = self.heroesDataSource?.getSelectedCharacters(),
+        if let characters = self.heroesDataSource?.getSelectedCharacters(),
             let dataSource = self.heroesDetailDataSource {
             //dataSource.character = characters
            //CRIAR SEGUE PARA DETAIL
