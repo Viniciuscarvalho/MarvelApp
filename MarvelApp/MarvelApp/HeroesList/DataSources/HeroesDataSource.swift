@@ -13,27 +13,16 @@ class HeroesDataSource: NSObject {
     
     fileprivate var characters: [Character]
     fileprivate var selectedCharacter: Character?
-    var collectionView: UICollectionView
-    var isSearching: Bool = false {
-        didSet {
-            self.reloadCollection()
-        }
-    }
+    var isSearching: Bool = false
     
-    init(with characters: [Character], collectionView: UICollectionView) {
+    init(with characters: [Character]) {
         self.characters = characters
-        self.collectionView = collectionView
         super.init()
     }
     
     func registerCell() {
         let nib = UINib(nibName: "HeroesCollectionViewCell", bundle: nil)
         self.collectionView.register(nib, forCellWithReuseIdentifier: "HeroesCollectionViewCell")
-    }
-    
-    func reloadCollection() {
-        collectionView.reloadData()
-        postCurrentStateNotification()
     }
     
     func numberOfCharacters() -> Int {

@@ -6,7 +6,6 @@
 //  Copyright © 2018 Vinicius Carvalho. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 enum ViewStates {
@@ -16,11 +15,11 @@ enum ViewStates {
     case noShowSearchResults
 }
 
-class HeroesViewController: UIViewController {
+final class HeroesViewController: UIViewController {
     
     var loadingView: LoadingView = LoadingView()
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private var collectionView: UICollectionView!
     var heroesDataSource: HeroesDataSource?
     var heroesDetailDataSource: HeroesDetailDataSource?
     fileprivate var viewModel: CharactersViewModelProtocol?
@@ -41,6 +40,7 @@ class HeroesViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         self.title = "Characters"
         self.setupNotification()
         self.setupDelegateAndDataSource()
@@ -50,13 +50,20 @@ class HeroesViewController: UIViewController {
         self.currentStates = .loading
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.heroesDataSource?.reloadCollection()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "detailCharacterSegue" else { return }
+        if let index = sender as? Int {
+            guard let destination = segue.destination as? HeroesDetailViewController else { return }
+            guard let item = self.viewModel?.character(index: index) else { return }
+            destination.viewModel = CharactersDetailViewModel(item: item)
+        } else if let item = sender as? Character {
+            guard let destination = segue.destination as? HeroesDetailViewController else { return }
+            destination.viewModel = CharactersDetailViewModel(item: item)
+        }
     }
     
     fileprivate func setupDelegateAndDataSource() {
-        self.heroesDataSource = HeroesDataSource(with: [], collectionView: collectionView)
+        self.heroesDataSource = HeroesDataSource(with: [])
     }
     
     fileprivate func setupNotification() {
@@ -87,5 +94,35 @@ extension HeroesViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.viewModel?.searchString = searchText
     }
+}
+
+extension HeroesViewController: CharactersViewModelLoadable {
+    func reloadData() {
+        DispatchQueue.main.async {
+            self.collection.reloadData()
+        }
+    }
+    
+//    func reloadFavorite() {
+//        guard let favorite = self.viewModel?.favoriteCharacter else {
+//            self.favoriteView.reset()
+//            return
+//        }
+//        DispatchQueue.main.async {
+//            self.collection.visibleCells.forEach { item in
+//                if let cell = item as? CharactersCollectionCell {
+//                    if cell.getID() != favorite.id {
+//                        cell.cleanFavorite()
+//                    }
+//                }
+//            }
+//            self.favoriteView.configureFavorite(favorite) { item in
+//                self.originImage = self.favoriteView.favoriteImage.image
+//                self.originFrame =  self.favoriteView.favoriteImage.frame
+//
+//                self.performSegue(withIdentifier: "detailCharacterSegue", sender: item)
+//            }
+//        }
+//    }
 }
 
