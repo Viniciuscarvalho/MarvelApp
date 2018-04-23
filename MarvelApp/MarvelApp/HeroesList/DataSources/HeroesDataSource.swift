@@ -59,20 +59,6 @@ extension HeroesDataSource: UICollectionViewDataSource {
     }
 }
 
-extension HeroesDataSource: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == self.characters.count - 2{
-            postNotification()
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let characters = self.getCharacter(byIndexPath: indexPath)
-        self.selectedCharacter = characters
-        postItemSelectionNotification()
-    }
-}
-
 extension HeroesDataSource: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
