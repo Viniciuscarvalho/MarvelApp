@@ -44,7 +44,13 @@ final class HeroesViewController: UIViewController {
         self.setupDelegateAndDataSource()
         self.viewModel = CharactersViewModel(loadableData: self)
         self.viewModel?.loadData()
+        self.registerCell()
         self.currentStates = .loading
+    }
+    
+    func registerCell() {
+        let nib = UINib(nibName: "HeroesCollectionViewCell", bundle: nil)
+        self.collectionView.register(nib, forCellWithReuseIdentifier: "HeroesCollectionViewCell")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -63,19 +69,27 @@ final class HeroesViewController: UIViewController {
         self.heroesDataSource = HeroesDataSource(with: [])
     }
     
-    @objc func changeCurrenteState() {
-        if self.heroesDataSource?.isSearching == true{
-            self.currentStates = .noShowSearchResults
-        } else {
-            self.currentStates = .showCharacters
-        }
-    }
-    
 }
 
 extension HeroesViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.viewModel?.searchString = searchText
+    }
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(true, animated: true)
+        return true
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text?.removeAll()
+        self.heroesDataSource?.isSearching = false
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
     }
 }
 

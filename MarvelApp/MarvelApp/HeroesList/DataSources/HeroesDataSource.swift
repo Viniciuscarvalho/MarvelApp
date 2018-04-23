@@ -20,11 +20,6 @@ class HeroesDataSource: NSObject {
         super.init()
     }
     
-    func registerCell() {
-        let nib = UINib(nibName: "HeroesCollectionViewCell", bundle: nil)
-        self.collectionView.register(nib, forCellWithReuseIdentifier: "HeroesCollectionViewCell")
-    }
-    
     func numberOfCharacters() -> Int {
         return characters.count
     }
