@@ -13,13 +13,17 @@ class HeroesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: ImageViewAsync!
     @IBOutlet weak var heroesTitle: UILabel!
     @IBOutlet weak var favoriteIcon: UIImageView!
+    fileprivate var character: Character?
+    fileprivate var viewModel: CharactersViewModelProtocol?
     
     fileprivate func clean() {
         self.heroesTitle.text = ""
         self.imageView.image = UIImage(named: "placeholder")
     }
     
-    func setup(character: Character) {
+    func setup(character: Character, viewModel: CharactersViewModelProtocol? = nil) {
+        self.character = character
+        self.viewModel = viewModel
         self.heroesTitle?.text = character.name
         self.heroesTitle?.font = UIFont(name: "Avenir", size: 16)
         self.setFavorite(character: character)

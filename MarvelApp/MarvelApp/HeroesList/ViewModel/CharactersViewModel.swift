@@ -52,7 +52,7 @@ final class CharactersViewModel: CharactersViewModelProtocol, CharactersManagerD
         if let searchHeroes = searchResult {
             return searchHeroes.count
         }
-        return CharactersDatabase.shared.count()
+        return 0
     }
     
     func character(index: Int) -> Character? {
@@ -60,7 +60,7 @@ final class CharactersViewModel: CharactersViewModelProtocol, CharactersManagerD
             guard index < searchHeroes.count else { return nil }
             return searchHeroes[index]
         }
-        return CharactersDatabase.shared.get(index: index)
+        return nil
     }
     
 }

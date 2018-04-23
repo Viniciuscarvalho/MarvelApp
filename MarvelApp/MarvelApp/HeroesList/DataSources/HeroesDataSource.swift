@@ -13,24 +13,12 @@ class HeroesDataSource: NSObject {
     
     fileprivate var characters: [Character]
     fileprivate var selectedCharacter: Character?
+    fileprivate var viewModel: CharactersViewModelProtocol?
     var isSearching: Bool = false
     
     init(with characters: [Character]) {
         self.characters = characters
         super.init()
-    }
-    
-    func numberOfCharacters() -> Int {
-        return characters.count
-    }
-    
-    func getCharacter(byIndexPath indexPath: IndexPath) -> Character {
-        let row = indexPath.row
-        return characters[row]
-    }
-    
-    func getSelectedCharacters() -> Character? {
-        return self.selectedCharacter
     }
     
 }
@@ -39,18 +27,26 @@ extension HeroesDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return self.numberOfCharacters()
+        let total = self.viewModel?.countData() ?? 0
+        return total
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeroesCollectionViewCell", for: indexPath) as? HeroesCollectionViewCell {
-            
-            let character = self.getCharacter(byIndexPath: indexPath)
-            
-            cell.setup(character: character)
-            return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HeroesCollectionViewCell.self), for: indexPath)
+        
+        nextPage(index: indexPath.row)
+        
+        if let characterCell = cell as? HeroesCollectionViewCell,
+            let character = self.viewModel?.character(index: indexPath.row) {
+            characterCell.setup(character: character, viewModel: self.viewModel)
         }
-        return UICollectionViewCell()
+        return cell
+    }
+    
+    fileprivate func nextPage(index: Int) {
+        guard let total =  self.viewModel?.countData() else { return }
+        guard index > Int(Double(total) * 0.7) else { return }
+        self.viewModel?.loadData()
     }
 }
 

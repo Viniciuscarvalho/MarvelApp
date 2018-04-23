@@ -71,6 +71,12 @@ final class HeroesViewController: UIViewController {
     
 }
 
+extension HeroesViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "detailCharacterSegue", sender: indexPath.row)
+    }
+}
 extension HeroesViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.viewModel?.searchString = searchText
