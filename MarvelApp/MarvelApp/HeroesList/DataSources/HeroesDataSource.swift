@@ -38,18 +38,6 @@ class HeroesDataSource: NSObject {
         return self.selectedCharacter
     }
     
-    func postNotification() {
-        NotificationConstants.shouldLoadCharacters.post()
-    }
-    
-    func postItemSelectionNotification() {
-        NotificationConstants.shouldHandleItemSelection.post()
-    }
-    
-    fileprivate func postCurrentStateNotification() {
-        NotificationConstants.shouldChangeCurrentState.post()
-    }
-    
 }
 
 extension HeroesDataSource: UICollectionViewDataSource {

@@ -70,7 +70,7 @@
                 <outlet property="heroesTitle" destination="Gvs-b2-V4V" id="F95-Am-Sqk"/>
                 <outlet property="imageView" destination="JY5-Kc-3yq" id="yqB-aC-xsa"/>
             </connections>
-            <point key="canvasLocation" x="-172" y="-1"/>
+            <point key="canvasLocation" x="-99" y="-3"/>
         </collectionViewCell>
     </objects>
     <resources>
