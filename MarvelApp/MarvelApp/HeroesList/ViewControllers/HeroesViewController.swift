@@ -67,6 +67,8 @@ final class HeroesViewController: UIViewController {
     
     fileprivate func setupDelegateAndDataSource() {
         self.heroesDataSource = HeroesDataSource(with: [])
+        self.collectionView.dataSource = heroesDataSource
+        self.collectionView.delegate = heroesDataSource
     }
     
 }
