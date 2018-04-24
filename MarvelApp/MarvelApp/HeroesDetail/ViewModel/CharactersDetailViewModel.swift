@@ -20,7 +20,7 @@ class CharactersDetailViewModel: CharactersDetailViewModelProtocol {
     
     init(character: Character) {
         self.character = character
-        cells.append(.label("Name", character.name))
+        //cells.append(.label("Name", character.name))
         if let description = character.description, !description.isEmpty {
             cells.append(.text("Description", description))
         }

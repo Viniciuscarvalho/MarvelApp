@@ -37,7 +37,6 @@
 		EA7B4043208D24FB007BD37B /* CharactersDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7B4042208D24FB007BD37B /* CharactersDetailViewModel.swift */; };
 		EA7B4046208D3262007BD37B /* CharacterDetailProviderFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7B4045208D3262007BD37B /* CharacterDetailProviderFields.swift */; };
 		EA7B4049208D3660007BD37B /* DetailLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7B4048208D3660007BD37B /* DetailLabelCell.swift */; };
-		EA7B404C208D3679007BD37B /* DetailTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7B404B208D3679007BD37B /* DetailTextCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,7 +85,6 @@
 		EA7B4042208D24FB007BD37B /* CharactersDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersDetailViewModel.swift; sourceTree = "<group>"; };
 		EA7B4045208D3262007BD37B /* CharacterDetailProviderFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailProviderFields.swift; sourceTree = "<group>"; };
 		EA7B4048208D3660007BD37B /* DetailLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLabelCell.swift; sourceTree = "<group>"; };
-		EA7B404B208D3679007BD37B /* DetailTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,7 +310,6 @@
 			isa = PBXGroup;
 			children = (
 				EA7B4048208D3660007BD37B /* DetailLabelCell.swift */,
-				EA7B404B208D3679007BD37B /* DetailTextCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -429,7 +426,6 @@
 				2F21710D20890DEA00E799BF /* Comic.swift in Sources */,
 				2F217123208940CF00E799BF /* PayloadRequest.swift in Sources */,
 				2F2171002089013700E799BF /* HeroesViewController.swift in Sources */,
-				EA7B404C208D3679007BD37B /* DetailTextCell.swift in Sources */,
 				2F217126208A2A7F00E799BF /* CharacterManager.swift in Sources */,
 				2F21713A208A8DDA00E799BF /* NibLoadableProtocol.swift in Sources */,
 				2F217138208A8DA300E799BF /* LoadingView.swift in Sources */,
