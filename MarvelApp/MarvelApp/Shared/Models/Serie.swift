@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Serie: ResourceURI {
+class Serie: ResourceURI, BaseItem {
     
     var resourceURI: String!
     var name: String?

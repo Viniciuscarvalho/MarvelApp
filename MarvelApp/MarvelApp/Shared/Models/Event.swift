@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Event: Codable {
+class Event: Codable, BaseItem {
     
     var resourceURI: String!
     var name: String?

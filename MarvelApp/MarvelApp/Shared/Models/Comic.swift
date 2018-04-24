@@ -8,7 +8,12 @@
 
 import Foundation
 
-class Comic: ResourceURI {
+protocol BaseItem {
+    var name: String? { get set }
+    var description: String? { get set }
+}
+
+class Comic: ResourceURI, BaseItem {
     
     var resourceURI: String!
     var name: String?

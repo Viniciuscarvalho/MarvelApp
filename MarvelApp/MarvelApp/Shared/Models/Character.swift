@@ -32,14 +32,14 @@ struct CharacterStories: Codable {
     var items: [Story]
 }
 
-struct Character: Hashable, Codable {
+struct Character: Hashable, Codable, BaseItem {
     static func == (lhs: Character, rhs: Character) -> Bool {
         return lhs.hashValue == rhs.hashValue
     }
     
     let id: Int
-    let name: String
-    let descriptionCharacter: String?
+    var name: String?
+    var description: String?
     let modified: String
     let thumbnail: Thumbnail?
     let resourceURI: String
@@ -52,9 +52,3 @@ struct Character: Hashable, Codable {
     public var hashValue: Int { return id }
 }
 
-extension Character {
-    
-    enum CodingKeys: String, CodingKey {
-        case descriptionCharacter = "description"
-    }
-}

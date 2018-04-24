@@ -138,7 +138,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="84.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5c-Cb-gga">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5c-Cb-gga">
                                                     <rect key="frame" x="16" y="16" width="343" height="25"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                                                     <color key="textColor" red="0.38545659510000002" green="0.38927299710000002" blue="0.38927299710000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

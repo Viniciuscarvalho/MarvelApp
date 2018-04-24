@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Story: ResourceURI {
+class Story: ResourceURI, BaseItem {
     var resourceURI : String!
     var name : String?
     var id: Int?
