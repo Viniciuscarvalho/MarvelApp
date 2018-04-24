@@ -13,6 +13,9 @@ final class HeroesViewController: UIViewController {
     @IBOutlet private var collectionView: UICollectionView!
     @IBOutlet weak var load: UIActivityIndicatorView!
     
+    fileprivate var originFrame: CGRect?
+    fileprivate var originImage: UIImage?
+    
     fileprivate var viewModel: CharactersViewModelProtocol?
     
     override func viewDidLoad() {
@@ -21,6 +24,7 @@ final class HeroesViewController: UIViewController {
         self.viewModel = CharactersViewModel(loadableData: self)
         self.viewModel?.loadData()
         self.registerCell()
+        self.navigationController?.delegate = self
     }
     
     func registerCell() {
@@ -39,7 +43,6 @@ final class HeroesViewController: UIViewController {
             destination.viewModel = CharactersDetailViewModel(character: item)
         }
     }
-    
 }
 
 extension HeroesViewController: UICollectionViewDataSource {
@@ -71,7 +74,6 @@ extension HeroesViewController: UICollectionViewDataSource {
 }
 
 extension HeroesViewController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellHeight = collectionView.bounds.height / 2.5
         let collectionPadding = CGFloat(45)
@@ -82,9 +84,29 @@ extension HeroesViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension HeroesViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        guard let frame = self.originFrame else { return nil }
+        guard let image = self.originImage else { return nil }
+        
+        switch operation {
+        case .push:
+            return CharacterAnimation(originFrame: frame, image: image, isShow: true)
+        default:
+            return CharacterAnimation(originFrame: frame, image: image)
+        }
+    }
+}
+
 extension HeroesViewController: UICollectionViewDelegate {
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let theAttributes = collectionView.layoutAttributesForItem(at: indexPath)
+        if let cell = collectionView.cellForItem(at: indexPath) as? HeroesCollectionViewCell,
+            let frame = theAttributes?.frame {
+            self.originImage = cell.image()
+            self.originFrame = collectionView.convert(frame, to: collectionView.superview)
+        }
         self.performSegue(withIdentifier: "detailCharacterSegue", sender: indexPath.row)
     }
 }

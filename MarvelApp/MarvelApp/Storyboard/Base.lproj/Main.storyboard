@@ -17,6 +17,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fW8-gE-MoL">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.8607630076142132" green="0.11739049645491986" blue="0.028562018570192301" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="xX1-d2-G1U" kind="relationship" relationship="rootViewController" id="Nxo-gp-noE"/>
@@ -26,7 +30,7 @@
             </objects>
             <point key="canvasLocation" x="-145" y="131"/>
         </scene>
-        <!--Heroes View Controller-->
+        <!--Characters-->
         <scene sceneID="4OH-Rv-uvn">
             <objects>
                 <viewController id="xX1-d2-G1U" customClass="HeroesViewController" customModule="MarvelApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -91,7 +95,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m1x-2p-ceu"/>
                     </view>
-                    <navigationItem key="navigationItem" id="t8Q-7L-P9D"/>
+                    <navigationItem key="navigationItem" title="Characters" id="t8Q-7L-P9D"/>
                     <connections>
                         <outlet property="collectionView" destination="dTh-jE-Erc" id="QpB-CI-e2n"/>
                         <outlet property="load" destination="EjO-ya-RSC" id="ujJ-Ax-Yae"/>
@@ -99,18 +103,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="foP-cA-mjZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="540" y="131"/>
+            <point key="canvasLocation" x="615" y="131"/>
         </scene>
-        <!--Heroes Detail View Controller-->
+        <!--Detail-->
         <scene sceneID="Mjb-mo-DpV">
             <objects>
-                <viewController id="H1R-8a-V23" customClass="HeroesDetailViewController" customModule="MarvelApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Detail" id="H1R-8a-V23" customClass="HeroesDetailViewController" customModule="MarvelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WIm-4l-UwR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-all" translatesAutoresizingMaskIntoConstraints="NO" id="ooI-h2-pB1">
-                                <rect key="frame" x="0.0" y="64" width="375" height="346"/>
+                            <imageView userInteractionEnabled="NO" tag="42" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-all" translatesAutoresizingMaskIntoConstraints="NO" id="ooI-h2-pB1">
+                                <rect key="frame" x="0.0" y="64" width="375" height="348"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite_gray_icon" translatesAutoresizingMaskIntoConstraints="NO" id="w7b-e4-SqH">
                                 <rect key="frame" x="329" y="355" width="30" height="30"/>
@@ -174,7 +178,9 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="yfe-w0-bEo" firstAttribute="top" secondItem="w7b-e4-SqH" secondAttribute="bottom" constant="27" id="3Lx-CO-lTO"/>
                             <constraint firstItem="tam-pW-STb" firstAttribute="trailing" secondItem="w7b-e4-SqH" secondAttribute="trailing" constant="16" id="3NU-Ov-a1n"/>
                             <constraint firstItem="w7b-e4-SqH" firstAttribute="top" secondItem="tam-pW-STb" secondAttribute="top" constant="291" id="5Xp-Xn-U4d"/>
                             <constraint firstItem="yfe-w0-bEo" firstAttribute="leading" secondItem="WIm-4l-UwR" secondAttribute="leading" id="9lf-OL-Bqf"/>
@@ -182,10 +188,11 @@
                             <constraint firstItem="yfe-w0-bEo" firstAttribute="leading" secondItem="tam-pW-STb" secondAttribute="leading" id="KOB-f1-1qQ"/>
                             <constraint firstAttribute="trailing" secondItem="yfe-w0-bEo" secondAttribute="trailing" id="SJx-0a-Z1o"/>
                             <constraint firstAttribute="bottom" secondItem="yfe-w0-bEo" secondAttribute="bottom" id="WRl-z5-WvR"/>
+                            <constraint firstItem="w7b-e4-SqH" firstAttribute="leading" secondItem="ooI-h2-pB1" secondAttribute="trailing" constant="-46" id="Y7r-gb-EgM"/>
                             <constraint firstItem="yfe-w0-bEo" firstAttribute="trailing" secondItem="tam-pW-STb" secondAttribute="trailing" id="cfa-KB-q1B"/>
                             <constraint firstItem="yfe-w0-bEo" firstAttribute="bottom" secondItem="tam-pW-STb" secondAttribute="bottom" id="cyV-Hs-diL"/>
                             <constraint firstItem="ooI-h2-pB1" firstAttribute="top" secondItem="tam-pW-STb" secondAttribute="top" id="lGC-lV-0wZ"/>
-                            <constraint firstItem="yfe-w0-bEo" firstAttribute="top" secondItem="ooI-h2-pB1" secondAttribute="bottom" constant="2" id="n2N-o8-heY"/>
+                            <constraint firstItem="yfe-w0-bEo" firstAttribute="top" secondItem="ooI-h2-pB1" secondAttribute="bottom" id="n2N-o8-heY"/>
                             <constraint firstItem="ooI-h2-pB1" firstAttribute="leading" secondItem="tam-pW-STb" secondAttribute="leading" id="zEn-xo-DeT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tam-pW-STb"/>
@@ -196,11 +203,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5H-WQ-sa2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1254" y="131"/>
+            <point key="canvasLocation" x="1357.5999999999999" y="130.88455772113943"/>
         </scene>
     </scenes>
     <resources>
         <image name="favorite_gray_icon" width="17" height="16"/>
         <image name="placeholder-all" width="622" height="415"/>
     </resources>
+    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

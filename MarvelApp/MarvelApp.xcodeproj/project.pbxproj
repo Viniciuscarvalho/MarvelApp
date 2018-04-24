@@ -37,6 +37,7 @@
 		EA7B4043208D24FB007BD37B /* CharactersDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7B4042208D24FB007BD37B /* CharactersDetailViewModel.swift */; };
 		EA7B4046208D3262007BD37B /* CharacterDetailProviderFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7B4045208D3262007BD37B /* CharacterDetailProviderFields.swift */; };
 		EA7B4049208D3660007BD37B /* DetailLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7B4048208D3660007BD37B /* DetailLabelCell.swift */; };
+		EA7B404F208EE2DA007BD37B /* CharacterAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7B404E208EE2DA007BD37B /* CharacterAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		EA7B4042208D24FB007BD37B /* CharactersDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersDetailViewModel.swift; sourceTree = "<group>"; };
 		EA7B4045208D3262007BD37B /* CharacterDetailProviderFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailProviderFields.swift; sourceTree = "<group>"; };
 		EA7B4048208D3660007BD37B /* DetailLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLabelCell.swift; sourceTree = "<group>"; };
+		EA7B404E208EE2DA007BD37B /* CharacterAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +280,7 @@
 			children = (
 				2F217127208A732500E799BF /* Assets.swift */,
 				EA7B4039208B867A007BD37B /* ImageViewAsync.swift */,
+				EA7B404E208EE2DA007BD37B /* CharacterAnimation.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA7B403E208BD2E0007BD37B /* CharactersViewModel.swift in Sources */,
+				EA7B404F208EE2DA007BD37B /* CharacterAnimation.swift in Sources */,
 				EA7B4043208D24FB007BD37B /* CharactersDetailViewModel.swift in Sources */,
 				EA7B403A208B867A007BD37B /* ImageViewAsync.swift in Sources */,
 				2F21710B20890DDF00E799BF /* Story.swift in Sources */,
