@@ -9,7 +9,7 @@
 import Foundation
 
 protocol CharactersManagerDelegate: class {
-    func finishLoadPage(error: Error?)
+    func finishLoadPage(data: [Character]?, error: Error?)
     func searchResult(data: [Character]?, error: Error?)
 }
 
@@ -53,14 +53,14 @@ class CharactersManager {
             switch result {
             case .success(let value):
                 guard let value = value as? PayloadRequest<MarvelApp.Character> else {
-                    self.delegate?.finishLoadPage(error: nil) ; return
+                    self.delegate?.finishLoadPage(data: nil, error: nil)
+                    return
                 }
-                //Adicionar item via coreData
                 self.total = value.data.count
-                self.delegate?.finishLoadPage(error: nil)
+                self.delegate?.finishLoadPage(data: value.data.results, error: nil)
                 self.page += 1
             case .error(let error):
-                self.delegate?.finishLoadPage(error: error)
+                self.delegate?.finishLoadPage(data: nil, error: error)
             }
         }
     }

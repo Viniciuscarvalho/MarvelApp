@@ -10,9 +10,9 @@ import UIKit
 
 final class HeroesViewController: UIViewController {
     
-    var loadingView: LoadingView = LoadingView()
-    
     @IBOutlet private var collectionView: UICollectionView!
+    @IBOutlet weak var load: UIActivityIndicatorView!
+    
     fileprivate var viewModel: CharactersViewModelProtocol?
     
     override func viewDidLoad() {
@@ -48,16 +48,14 @@ extension HeroesViewController: UICollectionViewDataSource {
                         numberOfItemsInSection section: Int) -> Int {
         let total = self.viewModel?.countData() ?? 0
         if total > 0 {
-            loadingView.stop()
+            load.stopAnimating()
         }
         return total
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HeroesCollectionViewCell.self), for: indexPath)
-        
-        nextPage(index: indexPath.row)
-        
+                
         if let characterCell = cell as? HeroesCollectionViewCell,
             let character = self.viewModel?.character(index: indexPath.row) {
             characterCell.setup(character: character, viewModel: self.viewModel)
@@ -72,7 +70,7 @@ extension HeroesViewController: UICollectionViewDataSource {
     }
 }
 
-extension HeroesDataSource: UICollectionViewDelegateFlowLayout {
+extension HeroesViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellHeight = collectionView.bounds.height / 2.5
@@ -106,6 +104,7 @@ extension HeroesViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text?.removeAll()
+        self.viewModel?.searchString = nil
         searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
     }

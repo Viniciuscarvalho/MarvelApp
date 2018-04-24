@@ -62,17 +62,27 @@
                                     <outlet property="delegate" destination="xX1-d2-G1U" id="skY-Qs-vPy"/>
                                 </connections>
                             </collectionView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Zdm-ns-iC1">
+                            <searchBar contentMode="redraw" placeholder="Search your Character" translatesAutoresizingMaskIntoConstraints="NO" id="Zdm-ns-iC1">
                                 <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="xX1-d2-G1U" id="KF6-ZO-dSo"/>
                                 </connections>
                             </searchBar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="EjO-ya-RSC">
+                                <rect key="frame" x="167.5" y="313.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="YZQ-K3-2G9"/>
+                                    <constraint firstAttribute="height" constant="40" id="sVd-wt-HSv"/>
+                                </constraints>
+                                <color key="color" red="1" green="0.13658508945135928" blue="0.030481293506792073" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="dTh-jE-Erc" firstAttribute="leading" secondItem="m1x-2p-ceu" secondAttribute="leading" id="CTg-6b-TXf"/>
+                            <constraint firstItem="EjO-ya-RSC" firstAttribute="centerX" secondItem="cic-Sy-bwl" secondAttribute="centerX" id="CdR-ee-SyI"/>
+                            <constraint firstItem="EjO-ya-RSC" firstAttribute="centerY" secondItem="cic-Sy-bwl" secondAttribute="centerY" id="RA2-0p-dMq"/>
                             <constraint firstItem="Zdm-ns-iC1" firstAttribute="top" secondItem="m1x-2p-ceu" secondAttribute="top" id="Tlh-Xe-DnM"/>
                             <constraint firstItem="dTh-jE-Erc" firstAttribute="trailing" secondItem="m1x-2p-ceu" secondAttribute="trailing" id="XRq-Pt-hhV"/>
                             <constraint firstItem="dTh-jE-Erc" firstAttribute="bottom" secondItem="m1x-2p-ceu" secondAttribute="bottom" id="ZPY-LW-Sof"/>
@@ -85,6 +95,7 @@
                     <navigationItem key="navigationItem" id="t8Q-7L-P9D"/>
                     <connections>
                         <outlet property="collectionView" destination="dTh-jE-Erc" id="QpB-CI-e2n"/>
+                        <outlet property="load" destination="EjO-ya-RSC" id="ujJ-Ax-Yae"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="foP-cA-mjZ" userLabel="First Responder" sceneMemberID="firstResponder"/>

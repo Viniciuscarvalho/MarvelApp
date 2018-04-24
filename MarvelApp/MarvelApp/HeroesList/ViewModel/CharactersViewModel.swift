@@ -66,8 +66,10 @@ final class CharactersViewModel: CharactersViewModelProtocol, CharactersManagerD
 }
 
 extension CharactersViewModel {
-    func finishLoadPage(error: Error?) {
+    func finishLoadPage(data: [Character]?, error: Error?) {
         guard error == nil else { return }
+        guard let data = data else { return }
+        self.searchResult = data
         loadableData?.reloadData()
     }
     

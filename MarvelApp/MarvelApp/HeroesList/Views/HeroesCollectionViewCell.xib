@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14111" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,8 +19,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="215" height="285"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash" translatesAutoresizingMaskIntoConstraints="NO" id="JY5-Kc-3yq">
-                        <rect key="frame" x="0.0" y="0.0" width="215" height="236"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash" translatesAutoresizingMaskIntoConstraints="NO" id="JY5-Kc-3yq">
+                        <rect key="frame" x="0.0" y="0.0" width="215" height="235"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uu0-35-8W7">
                         <rect key="frame" x="0.0" y="235" width="215" height="50"/>
@@ -34,34 +34,33 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favorite_gray_icon" translatesAutoresizingMaskIntoConstraints="NO" id="MJm-kc-I86">
                                 <rect key="frame" x="186" y="14.5" width="21" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="21" id="NNV-4v-qBb"/>
-                                    <constraint firstAttribute="height" constant="21" id="SRN-an-naO"/>
+                                    <constraint firstAttribute="height" constant="21" id="9DM-i3-dUd"/>
+                                    <constraint firstAttribute="width" constant="21" id="x1V-XC-bs9"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.17275962233543396" green="0.18805280327796936" blue="0.28613275289535522" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Gvs-b2-V4V" firstAttribute="centerY" secondItem="uu0-35-8W7" secondAttribute="centerY" id="EIX-Ex-CIg"/>
-                            <constraint firstItem="Gvs-b2-V4V" firstAttribute="leading" secondItem="uu0-35-8W7" secondAttribute="leading" constant="8" id="JkG-d9-cl6"/>
-                            <constraint firstItem="Gvs-b2-V4V" firstAttribute="centerX" secondItem="uu0-35-8W7" secondAttribute="centerX" constant="-15" id="UdO-Ht-XCO"/>
-                            <constraint firstAttribute="trailing" secondItem="MJm-kc-I86" secondAttribute="trailing" constant="8" id="eim-1l-PZd"/>
-                            <constraint firstAttribute="bottom" secondItem="Gvs-b2-V4V" secondAttribute="bottom" constant="8" id="f3L-Kv-eDY"/>
-                            <constraint firstItem="Gvs-b2-V4V" firstAttribute="top" secondItem="uu0-35-8W7" secondAttribute="top" constant="8" id="g9D-HI-iwl"/>
-                            <constraint firstItem="MJm-kc-I86" firstAttribute="centerY" secondItem="uu0-35-8W7" secondAttribute="centerY" id="uZ9-b9-GqQ"/>
-                            <constraint firstAttribute="trailing" secondItem="Gvs-b2-V4V" secondAttribute="trailing" constant="38" id="vPY-d8-e3z"/>
+                            <constraint firstItem="MJm-kc-I86" firstAttribute="top" secondItem="uu0-35-8W7" secondAttribute="top" constant="14.5" id="1yG-rI-6jc"/>
+                            <constraint firstAttribute="height" constant="50" id="21g-YA-VQr"/>
+                            <constraint firstAttribute="trailing" secondItem="MJm-kc-I86" secondAttribute="trailing" constant="8" id="C06-hK-9mU"/>
+                            <constraint firstItem="MJm-kc-I86" firstAttribute="leading" secondItem="Gvs-b2-V4V" secondAttribute="trailing" constant="9" id="GOw-dz-IvR"/>
+                            <constraint firstAttribute="bottom" secondItem="MJm-kc-I86" secondAttribute="bottom" constant="14.5" id="I5l-2Q-Det"/>
+                            <constraint firstItem="Gvs-b2-V4V" firstAttribute="leading" secondItem="uu0-35-8W7" secondAttribute="leading" constant="8" id="Pph-dr-uDN"/>
+                            <constraint firstItem="Gvs-b2-V4V" firstAttribute="top" secondItem="uu0-35-8W7" secondAttribute="top" constant="8" id="jSq-46-qgQ"/>
+                            <constraint firstAttribute="bottom" secondItem="Gvs-b2-V4V" secondAttribute="bottom" constant="8" id="uwF-oQ-jYe"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="JY5-Kc-3yq" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="0qb-fR-iyG"/>
-                <constraint firstAttribute="trailing" secondItem="JY5-Kc-3yq" secondAttribute="trailing" id="3T6-Vw-fRS"/>
-                <constraint firstItem="uu0-35-8W7" firstAttribute="trailing" secondItem="JY5-Kc-3yq" secondAttribute="trailing" id="E1H-5J-aQ4"/>
-                <constraint firstItem="uu0-35-8W7" firstAttribute="leading" secondItem="JY5-Kc-3yq" secondAttribute="leading" id="JjL-YA-HHu"/>
-                <constraint firstItem="uu0-35-8W7" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="235" id="m3m-MQ-K2w"/>
-                <constraint firstItem="uu0-35-8W7" firstAttribute="top" secondItem="JY5-Kc-3yq" secondAttribute="bottom" constant="-1" id="mIe-WS-dCw"/>
-                <constraint firstItem="JY5-Kc-3yq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="pjZ-N7-gWg"/>
-                <constraint firstAttribute="bottom" secondItem="uu0-35-8W7" secondAttribute="bottom" id="yzj-el-bAA"/>
+                <constraint firstAttribute="bottom" secondItem="uu0-35-8W7" secondAttribute="bottom" id="5g0-sC-9cc"/>
+                <constraint firstAttribute="trailing" secondItem="JY5-Kc-3yq" secondAttribute="trailing" id="7H9-99-NW3"/>
+                <constraint firstItem="uu0-35-8W7" firstAttribute="top" secondItem="JY5-Kc-3yq" secondAttribute="bottom" id="UtC-39-wTB"/>
+                <constraint firstItem="JY5-Kc-3yq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="WLR-Rx-ST1"/>
+                <constraint firstItem="JY5-Kc-3yq" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bqW-0J-4Dg"/>
+                <constraint firstItem="uu0-35-8W7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="gaU-aF-SPS"/>
+                <constraint firstAttribute="trailing" secondItem="uu0-35-8W7" secondAttribute="trailing" id="mbE-mL-WIT"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="215" height="259"/>
@@ -70,7 +69,7 @@
                 <outlet property="heroesTitle" destination="Gvs-b2-V4V" id="F95-Am-Sqk"/>
                 <outlet property="imageView" destination="JY5-Kc-3yq" id="yqB-aC-xsa"/>
             </connections>
-            <point key="canvasLocation" x="-99" y="-3"/>
+            <point key="canvasLocation" x="-99.5" y="-3.5"/>
         </collectionViewCell>
     </objects>
     <resources>
