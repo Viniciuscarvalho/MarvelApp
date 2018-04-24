@@ -8,6 +8,12 @@
 
 import Foundation
 
+extension Date {
+    func toMillis() -> Int64 {
+        return Int64(self.timeIntervalSince1970 * 1000)
+    }
+}
+
 struct Endpoints {
     var path: String
     let params: [String: String]
@@ -17,17 +23,11 @@ struct Endpoints {
     let timeStamp = "\(Date().toMillis())"
 }
 
-extension Date {
-    func toMillis() -> Int64 {
-        return Int64(self.timeIntervalSince1970 * 1000)
-    }
-}
-
 extension Endpoints {
     
     fileprivate func generateParams() -> String {
         var newParams = self.params
-        newParams["apiKeys"] = self.publicKey
+        newParams["apikey"] = self.publicKey
         newParams["hash"] = self.hash()
         newParams["ts"] = self.timeStamp
         

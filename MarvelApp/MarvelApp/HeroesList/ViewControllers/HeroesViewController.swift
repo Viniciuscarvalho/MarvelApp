@@ -8,44 +8,19 @@
 
 import UIKit
 
-enum ViewStates {
-    case loading
-    case showCharacters
-    case errorLoadCharacters
-    case noShowSearchResults
-}
-
 final class HeroesViewController: UIViewController {
     
     var loadingView: LoadingView = LoadingView()
     
     @IBOutlet private var collectionView: UICollectionView!
-    var heroesDataSource: HeroesDataSource?
     fileprivate var viewModel: CharactersViewModelProtocol?
-    
-    var currentStates: ViewStates = .loading {
-        didSet {
-            switch currentStates {
-            case .loading:
-                self.loadingView.start()
-            case .showCharacters:
-                self.loadingView.stop()
-            case .errorLoadCharacters:
-                self.loadingView.stop()
-            case .noShowSearchResults:
-                self.loadingView.stop()
-            }
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Characters"
-        self.setupDelegateAndDataSource()
         self.viewModel = CharactersViewModel(loadableData: self)
         self.viewModel?.loadData()
         self.registerCell()
-        self.currentStates = .loading
     }
     
     func registerCell() {
@@ -65,12 +40,48 @@ final class HeroesViewController: UIViewController {
         }
     }
     
-    fileprivate func setupDelegateAndDataSource() {
-        self.heroesDataSource = HeroesDataSource(with: [])
-        self.collectionView.dataSource = heroesDataSource
-        self.collectionView.delegate = heroesDataSource
+}
+
+extension HeroesViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        let total = self.viewModel?.countData() ?? 0
+        if total > 0 {
+            loadingView.stop()
+        }
+        return total
     }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HeroesCollectionViewCell.self), for: indexPath)
+        
+        nextPage(index: indexPath.row)
+        
+        if let characterCell = cell as? HeroesCollectionViewCell,
+            let character = self.viewModel?.character(index: indexPath.row) {
+            characterCell.setup(character: character, viewModel: self.viewModel)
+        }
+        return cell
+    }
+    
+    fileprivate func nextPage(index: Int) {
+        guard let total =  self.viewModel?.countData() else { return }
+        guard index > Int(Double(total) * 0.7) else { return }
+        self.viewModel?.loadData()
+    }
+}
+
+extension HeroesDataSource: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellHeight = collectionView.bounds.height / 2.5
+        let collectionPadding = CGFloat(45)
+        let collectionWidth = collectionView.bounds.width - collectionPadding
+        let cellWidth = collectionWidth / 2
+        
+        return CGSize(width: cellWidth, height: cellHeight);
+    }
 }
 
 extension HeroesViewController: UICollectionViewDelegate {
@@ -95,7 +106,6 @@ extension HeroesViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text?.removeAll()
-        self.heroesDataSource?.isSearching = false
         searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
     }

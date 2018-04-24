@@ -36,7 +36,6 @@ class APIClient<T: Codable>: Client {
             } catch {
                 callback(.error(.parseError))
             }
-            
         }
         
         task.resume()
