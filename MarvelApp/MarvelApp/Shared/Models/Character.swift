@@ -9,45 +9,52 @@
 import Foundation
 
 struct CharacterComics: Codable {
-    var available : Int
-    var collectionURI : String
-    var items : [Comic]
+    var available: Int
+    var collectionURI: String
+    var items: [Comic]
 }
 
 struct CharacterSeries: Codable {
-    var available : Int
-    var collectionURI : String
-    var items : [Serie]
+    var available: Int
+    var collectionURI: String
+    var items: [Serie]
 }
 
 struct CharacterEvents: Codable {
-    var available : Int
-    var collectionURI : String
-    var items : [Event]
+    var available: Int
+    var collectionURI: String
+    var items: [Event]
 }
 
 struct CharacterStories: Codable {
-    var available : Int
-    var collectionURI : String
-    var items : [Story]
+    var available: Int
+    var collectionURI: String
+    var items: [Story]
 }
 
 struct Character: Hashable, Codable {
-    static func ==(lhs: Character, rhs: Character) -> Bool {
+    static func == (lhs: Character, rhs: Character) -> Bool {
         return lhs.hashValue == rhs.hashValue
     }
     
-    let id : Int
-    let name : String
-    let description : String?
-    let modified : String
-    let thumbnail : Thumbnail?
-    let resourceURI : String
-    let comics : CharacterComics?
-    let series : CharacterSeries?
-    let stories : CharacterStories?
-    let events : CharacterEvents?
-    let urls : [Url]?
+    let id: Int
+    let name: String
+    let descriptionCharacter: String?
+    let modified: String
+    let thumbnail: Thumbnail?
+    let resourceURI: String
+    let comics: CharacterComics?
+    let series: CharacterSeries?
+    let stories: CharacterStories?
+    let events: CharacterEvents?
+    let urls: [Url]?
     
     public var hashValue: Int { return id }
+}
+
+extension Character {
+    
+    enum CodingKeys: String, CodingKey {
+        case descriptionCharacter = "description"
+    }
 }

@@ -11,7 +11,7 @@ import UIKit
 class HeroesDetailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    var viewModel: CharactersDetailViewModelProtocol?
+    var viewModel: CharactersDetailViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,13 +21,15 @@ class HeroesDetailViewController: UIViewController {
 
 extension HeroesDetailViewController: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.count() ?? 0
+        return 1
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let item = viewModel?.item(index: indexPath.row) else { return UITableViewCell() }
-        let cell = tableView.dequeueReusableCell(withIdentifier: item.cellID())
-        item.populateCell(cell)
-        return cell!
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: HeroesDetailCell.self), for: indexPath)
+        
+        if let characterDetailCell = cell as? HeroesDetailCell {
+            characterDetailCell.populateCell(viewModel: self.viewModel!)
+        }
+        return cell
     }
 }
