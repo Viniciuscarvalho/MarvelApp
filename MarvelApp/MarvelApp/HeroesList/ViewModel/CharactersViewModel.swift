@@ -30,6 +30,7 @@ final class CharactersViewModel: CharactersViewModelProtocol, CharactersManagerD
             if let searchString = searchString, !searchString.isEmpty {
                 managerProvider?.doSearch(name: searchString)
             } else {
+                managerProvider?.resetSearch()
                 managerProvider?.getPage()
                 searchResult = nil
             }

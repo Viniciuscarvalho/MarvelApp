@@ -45,6 +45,12 @@ class CharactersManager {
         }
     }
     
+    func resetSearch() {
+        characters = nil
+        page = 0
+        total = 0
+    }
+    
     func getPage() {
         guard (self.total / pageSize) <= page else { return }
         
