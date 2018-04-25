@@ -139,13 +139,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5c-Cb-gga">
-                                                    <rect key="frame" x="16" y="16" width="343" height="25"/>
+                                                    <rect key="frame" x="16" y="16" width="343" height="25.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                                                     <color key="textColor" red="0.38545659510000002" green="0.38927299710000002" blue="0.38927299710000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Us-1o-IK1">
-                                                    <rect key="frame" x="16" y="49" width="343" height="19.5"/>
+                                                    <rect key="frame" x="16" y="49.5" width="343" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -172,6 +172,16 @@
                                     <outlet property="delegate" destination="H1R-8a-V23" id="QwI-UF-qn5"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U8s-fb-ysa">
+                                <rect key="frame" x="329" y="355" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="Zz8-Rh-PQ2"/>
+                                    <constraint firstAttribute="height" constant="30" id="g4n-qV-Bze"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="didFavorite:" destination="H1R-8a-V23" eventType="touchUpInside" id="2h5-8J-D1V"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -181,6 +191,7 @@
                             <constraint firstItem="w7b-e4-SqH" firstAttribute="top" secondItem="tam-pW-STb" secondAttribute="top" constant="291" id="5Xp-Xn-U4d"/>
                             <constraint firstItem="yfe-w0-bEo" firstAttribute="leading" secondItem="WIm-4l-UwR" secondAttribute="leading" id="9lf-OL-Bqf"/>
                             <constraint firstItem="ooI-h2-pB1" firstAttribute="trailing" secondItem="tam-pW-STb" secondAttribute="trailing" id="BA8-v5-rfi"/>
+                            <constraint firstItem="U8s-fb-ysa" firstAttribute="leading" secondItem="w7b-e4-SqH" secondAttribute="leading" id="Eqv-ba-Ccd"/>
                             <constraint firstItem="yfe-w0-bEo" firstAttribute="leading" secondItem="tam-pW-STb" secondAttribute="leading" id="KOB-f1-1qQ"/>
                             <constraint firstAttribute="trailing" secondItem="yfe-w0-bEo" secondAttribute="trailing" id="SJx-0a-Z1o"/>
                             <constraint firstAttribute="bottom" secondItem="yfe-w0-bEo" secondAttribute="bottom" id="WRl-z5-WvR"/>
@@ -189,11 +200,14 @@
                             <constraint firstItem="yfe-w0-bEo" firstAttribute="bottom" secondItem="tam-pW-STb" secondAttribute="bottom" id="cyV-Hs-diL"/>
                             <constraint firstItem="ooI-h2-pB1" firstAttribute="top" secondItem="tam-pW-STb" secondAttribute="top" id="lGC-lV-0wZ"/>
                             <constraint firstItem="yfe-w0-bEo" firstAttribute="top" secondItem="ooI-h2-pB1" secondAttribute="bottom" id="n2N-o8-heY"/>
+                            <constraint firstItem="U8s-fb-ysa" firstAttribute="top" secondItem="w7b-e4-SqH" secondAttribute="top" id="uLm-3V-OHO"/>
                             <constraint firstItem="ooI-h2-pB1" firstAttribute="leading" secondItem="tam-pW-STb" secondAttribute="leading" id="zEn-xo-DeT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tam-pW-STb"/>
                     </view>
                     <connections>
+                        <outlet property="didFavorite" destination="U8s-fb-ysa" id="GFM-QT-0rs"/>
+                        <outlet property="favoriteIcon" destination="w7b-e4-SqH" id="S5c-2I-apk"/>
                         <outlet property="tableView" destination="yfe-w0-bEo" id="SGm-8H-61o"/>
                     </connections>
                 </viewController>

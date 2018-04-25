@@ -27,6 +27,11 @@ final class HeroesViewController: UIViewController {
         self.navigationController?.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.reloadData()
+    }
+    
     func registerCell() {
         let nib = UINib(nibName: "HeroesCollectionViewCell", bundle: nil)
         self.collectionView.register(nib, forCellWithReuseIdentifier: "HeroesCollectionViewCell")

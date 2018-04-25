@@ -8,15 +8,44 @@
 
 import UIKit
 
+protocol FavoriteDelegate: class {
+    func save(character: Character?)
+}
+
 class HeroesDetailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var favoriteIcon: UIImageView!
+    
     var viewModel: CharactersDetailViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.reloadData()
+        loadFavorite()
     }
+    
+    @IBAction func didFavorite(_ sender: Any) {
+        let character = viewModel.output["Character"]?.first as? Character
+        save(character: character)
+    }
+    
+    private func loadFavorite() {
+        let character = viewModel.output["Character"]?.first as? Character
+        
+        guard let item = character, let name = item.name else { return }
+        
+        if let status = UserDefaults.standard.value(forKey: name) as? Bool {
+            if status {
+                favoriteIcon.image = UIImage(named: "favorite_full_icon")
+            }
+        }
+    }
+    
+    private func setFavorite(status: Bool) {
+        favoriteIcon.image = (status ? UIImage(named: "favorite_full_icon") : UIImage(named: "favorite_empty_icon"))
+    }
+    
 }
 
 extension HeroesDetailViewController: UITableViewDataSource {
@@ -56,4 +85,22 @@ extension HeroesDetailViewController: UITableViewDataSource {
         }
         return cell
     }
+}
+
+extension HeroesDetailViewController: FavoriteDelegate {
+    
+    func save(character: Character?) {
+        guard let character = character, let name = character.name else { return }
+        
+        if let status = UserDefaults.standard.value(forKey: name) as? Bool {
+            setFavorite(status: !status)
+            UserDefaults.standard.set(!status, forKey: name)
+        } else {
+            setFavorite(status: true)
+            UserDefaults.standard.set(true, forKey: name)
+        }
+        
+        UserDefaults.standard.synchronize()
+    }
+    
 }

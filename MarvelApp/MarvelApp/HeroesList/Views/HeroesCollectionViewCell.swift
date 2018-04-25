@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol FavoriteDelegate: class {
+    func save(character: Character?)
+}
+
 class HeroesCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: ImageViewAsync!
