@@ -25,6 +25,23 @@ class HeroesCollectionViewCell: UICollectionViewCell {
         self.imageView.image = UIImage(named: "placeholder")
     }
     
+    func setFavorite(character: Character) {
+        let id = "F\(character.id)"
+        
+        DispatchQueue.main.async {
+            if let status = UserDefaults.standard.value(forKey: id) as? Bool {
+                if status {
+                    self.favoriteIcon.image = Assets.favoriteFull.image
+                }
+            }
+        }
+    }
+    
+    override func prepareForReuse() {
+        self.imageView.image = Assets.logo.image
+        self.favoriteIcon.image = Assets.favoriteGray.image
+    }
+    
     func setup(character: Character, viewModel: CharactersViewModelProtocol? = nil) {
         self.character = character
         self.viewModel = viewModel
@@ -33,16 +50,8 @@ class HeroesCollectionViewCell: UICollectionViewCell {
         if let path = character.thumbnail?.path, let ext = character.thumbnail?.extension {
             self.imageView?.imageFromServerURL(urlString: "\(path).\(ext)")
         }
+        self.setFavorite(character: character)
         
-        guard let name = character.name else { return }
-        
-        print("NAME: \(name)")
-        
-        if let status = UserDefaults.standard.value(forKey: name) as? Bool {
-            if status {
-                favoriteIcon.image = UIImage(named: "favorite_full_icon")
-            }
-        }
     }
     
     public func image() -> UIImage? {

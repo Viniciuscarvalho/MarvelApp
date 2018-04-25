@@ -29,17 +29,18 @@ class HeroesDetailViewController: UIViewController {
     private func loadFavorite() {
         let character = viewModel.output["Character"]?.first as? Character
         
-        guard let item = character, let name = item.name else { return }
+        guard let item = character else { return }
+        let id = "F\(item.id)"
         
-        if let status = UserDefaults.standard.value(forKey: name) as? Bool {
+        if let status = UserDefaults.standard.value(forKey: id) as? Bool {
             if status {
-                favoriteIcon.image = UIImage(named: "favorite_full_icon")
+                favoriteIcon.image = Assets.favoriteFull.image
             }
         }
     }
     
     private func setFavorite(status: Bool) {
-        favoriteIcon.image = (status ? UIImage(named: "favorite_full_icon") : UIImage(named: "favorite_empty_icon"))
+        favoriteIcon.image = (status ? Assets.favoriteFull.image : Assets.favoriteEmpty.image)
     }
     
 }
@@ -86,14 +87,15 @@ extension HeroesDetailViewController: UITableViewDataSource {
 extension HeroesDetailViewController: FavoriteDelegate {
     
     func save(character: Character?) {
-        guard let character = character, let name = character.name else { return }
+        guard let character = character else { return }
+        let id = "F\(character.id)"
         
-        if let status = UserDefaults.standard.value(forKey: name) as? Bool {
+        if let status = UserDefaults.standard.value(forKey: id) as? Bool {
             setFavorite(status: !status)
-            UserDefaults.standard.set(!status, forKey: name)
+            UserDefaults.standard.removeObject(forKey: id)
         } else {
             setFavorite(status: true)
-            UserDefaults.standard.set(true, forKey: name)
+            UserDefaults.standard.set(true, forKey: id)
         }
         
         UserDefaults.standard.synchronize()

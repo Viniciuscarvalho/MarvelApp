@@ -9,7 +9,7 @@
 import Foundation
 
 protocol CharactersViewModelLoadable {
-    func reloadData()
+    func reloadElements()
 }
 
 protocol CharactersViewModelProtocol {
@@ -30,6 +30,7 @@ final class CharactersViewModel: CharactersViewModelProtocol, CharactersManagerD
             if let searchString = searchString, !searchString.isEmpty {
                 managerProvider?.doSearch(name: searchString)
             } else {
+                managerProvider?.getPage()
                 searchResult = nil
             }
         }
@@ -70,13 +71,13 @@ extension CharactersViewModel {
         guard error == nil else { return }
         guard let data = data else { return }
         self.searchResult = data
-        loadableData?.reloadData()
+        loadableData?.reloadElements()
     }
     
     func searchResult(data: [Character]?, error: Error?) {
         guard error == nil else { return }
         self.searchResult = data
-        loadableData?.reloadData()
+        loadableData?.reloadElements()
     }
     
 }

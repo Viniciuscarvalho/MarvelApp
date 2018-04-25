@@ -29,7 +29,7 @@ final class HeroesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.reloadData()
+        self.reloadElements()
     }
     
     func registerCell() {
@@ -138,10 +138,11 @@ extension HeroesViewController: UISearchBarDelegate {
 }
 
 extension HeroesViewController: CharactersViewModelLoadable {
-    func reloadData() {
+    func reloadElements() {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
     }
 }
+
 
