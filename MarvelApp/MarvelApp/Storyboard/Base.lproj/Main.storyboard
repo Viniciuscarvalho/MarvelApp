@@ -206,7 +206,6 @@
                         <viewLayoutGuide key="safeArea" id="tam-pW-STb"/>
                     </view>
                     <connections>
-                        <outlet property="didFavorite" destination="U8s-fb-ysa" id="GFM-QT-0rs"/>
                         <outlet property="favoriteIcon" destination="w7b-e4-SqH" id="S5c-2I-apk"/>
                         <outlet property="tableView" destination="yfe-w0-bEo" id="SGm-8H-61o"/>
                     </connections>

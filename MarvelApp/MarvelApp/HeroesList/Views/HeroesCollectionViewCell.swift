@@ -33,6 +33,16 @@ class HeroesCollectionViewCell: UICollectionViewCell {
         if let path = character.thumbnail?.path, let ext = character.thumbnail?.extension {
             self.imageView?.imageFromServerURL(urlString: "\(path).\(ext)")
         }
+        
+        guard let name = character.name else { return }
+        
+        print("NAME: \(name)")
+        
+        if let status = UserDefaults.standard.value(forKey: name) as? Bool {
+            if status {
+                favoriteIcon.image = UIImage(named: "favorite_full_icon")
+            }
+        }
     }
     
     public func image() -> UIImage? {

@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol FavoriteDelegate: class {
-    func save(character: Character?)
-}
-
 class HeroesDetailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -25,7 +21,7 @@ class HeroesDetailViewController: UIViewController {
         loadFavorite()
     }
     
-    @IBAction func didFavorite(_ sender: Any) {
+    @IBAction func didFavorite(_ sender: UIButton) {
         let character = viewModel.output["Character"]?.first as? Character
         save(character: character)
     }
