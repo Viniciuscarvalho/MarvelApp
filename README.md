@@ -2,14 +2,17 @@
 
 This application is intended to list Super Heroes being presented on [Marvel API](https://developer.marvel.com/)
 
-This application was developed using MVC, avoiding the notorious Massive View Controller, respecting the principles of design patterns like SRP and Observable.
+I started structuring the project with MVC, but then I saw that it would have an approach and grow better structured with MVVM where I could separate a logic in the ViewModel layer, respecting the principles of design patterns like SRP and Observable.
 
 ## Enviroment
 
 - Xcode 9.3
-- Swift 4.1
-- Core Data
-- No libs 
+- Swift 4
+- No libs
+
+###Improvments
+
+- Add more tests units 
 
 ### Important!!
 
