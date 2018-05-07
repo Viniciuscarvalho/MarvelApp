@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class HeroesViewController: UIViewController {
+final class CharactersViewController: UIViewController {
     
     @IBOutlet private var collectionView: UICollectionView!
     @IBOutlet weak var load: UIActivityIndicatorView!
@@ -33,24 +33,24 @@ final class HeroesViewController: UIViewController {
     }
     
     func registerCell() {
-        let nib = UINib(nibName: "HeroesCollectionViewCell", bundle: nil)
-        self.collectionView.register(nib, forCellWithReuseIdentifier: "HeroesCollectionViewCell")
+        let nib = UINib(nibName: "CharactersCollectionViewCell", bundle: nil)
+        self.collectionView.register(nib, forCellWithReuseIdentifier: "CharactersCollectionViewCell")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "detailCharacterSegue" else { return }
         if let index = sender as? Int {
-            guard let destination = segue.destination as? HeroesDetailViewController else { return }
+            guard let destination = segue.destination as? CharactersDetailViewController else { return }
             guard let item = self.viewModel?.character(index: index) else { return }
             destination.viewModel = CharactersDetailViewModel(character: item)
         } else if let item = sender as? Character {
-            guard let destination = segue.destination as? HeroesDetailViewController else { return }
+            guard let destination = segue.destination as? CharactersDetailViewController else { return }
             destination.viewModel = CharactersDetailViewModel(character: item)
         }
     }
 }
 
-extension HeroesViewController: UICollectionViewDataSource {
+extension CharactersViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
@@ -62,9 +62,9 @@ extension HeroesViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: HeroesCollectionViewCell.self), for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CharactersCollectionViewCell.self), for: indexPath)
                 
-        if let characterCell = cell as? HeroesCollectionViewCell,
+        if let characterCell = cell as? CharactersCollectionViewCell,
             let character = self.viewModel?.character(index: indexPath.row) {
             characterCell.setup(character: character, viewModel: self.viewModel)
         }
@@ -78,7 +78,7 @@ extension HeroesViewController: UICollectionViewDataSource {
     }
 }
 
-extension HeroesViewController: UICollectionViewDelegateFlowLayout {
+extension CharactersViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellHeight = collectionView.bounds.height / 2.5
         let collectionPadding = CGFloat(45)
@@ -89,7 +89,7 @@ extension HeroesViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension HeroesViewController: UINavigationControllerDelegate {
+extension CharactersViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         guard let frame = self.originFrame else { return nil }
@@ -104,10 +104,10 @@ extension HeroesViewController: UINavigationControllerDelegate {
     }
 }
 
-extension HeroesViewController: UICollectionViewDelegate {
+extension CharactersViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let theAttributes = collectionView.layoutAttributesForItem(at: indexPath)
-        if let cell = collectionView.cellForItem(at: indexPath) as? HeroesCollectionViewCell,
+        if let cell = collectionView.cellForItem(at: indexPath) as? CharactersCollectionViewCell,
             let frame = theAttributes?.frame {
             self.originImage = cell.image()
             self.originFrame = collectionView.convert(frame, to: collectionView.superview)
@@ -115,7 +115,7 @@ extension HeroesViewController: UICollectionViewDelegate {
         self.performSegue(withIdentifier: "detailCharacterSegue", sender: indexPath.row)
     }
 }
-extension HeroesViewController: UISearchBarDelegate {
+extension CharactersViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.viewModel?.searchString = searchText
     }
@@ -137,7 +137,7 @@ extension HeroesViewController: UISearchBarDelegate {
     }
 }
 
-extension HeroesViewController: CharactersViewModelLoadable {
+extension CharactersViewController: CharactersViewModelLoadable {
     func reloadElements() {
         DispatchQueue.main.async {
             self.collectionView.reloadData()

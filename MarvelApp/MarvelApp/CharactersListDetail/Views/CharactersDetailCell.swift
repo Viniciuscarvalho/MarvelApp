@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class HeroesDetailCell: UITableViewCell {
+final class CharactersDetailCell: UITableViewCell {
     
     @IBOutlet fileprivate var titleLabel: UILabel!
     @IBOutlet fileprivate var txtLabel: UILabel!

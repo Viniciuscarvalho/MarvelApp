@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HeroesDetailViewController: UIViewController {
+class CharactersDetailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var favoriteIcon: UIImageView!
@@ -45,7 +45,7 @@ class HeroesDetailViewController: UIViewController {
     
 }
 
-extension HeroesDetailViewController: UITableViewDataSource {
+extension CharactersDetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.output.count
     }
@@ -67,9 +67,9 @@ extension HeroesDetailViewController: UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: HeroesDetailCell.self), for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CharactersDetailCell.self), for: indexPath)
         
-        if let characterDetailCell = cell as? HeroesDetailCell {
+        if let characterDetailCell = cell as? CharactersDetailCell {
             let item = viewModel.output.enumerated().filter({ index, _ in
                 return index == indexPath.section
             }).map { (index, element) in
@@ -84,7 +84,7 @@ extension HeroesDetailViewController: UITableViewDataSource {
     }
 }
 
-extension HeroesDetailViewController: FavoriteDelegate {
+extension CharactersDetailViewController: FavoriteDelegate {
     
     func save(character: Character?) {
         guard let character = character else { return }

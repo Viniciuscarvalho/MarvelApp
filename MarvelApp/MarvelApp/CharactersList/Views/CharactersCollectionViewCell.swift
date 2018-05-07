@@ -12,7 +12,7 @@ protocol FavoriteDelegate: class {
     func save(character: Character?)
 }
 
-class HeroesCollectionViewCell: UICollectionViewCell {
+class CharactersCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: ImageViewAsync!
     @IBOutlet weak var heroesTitle: UILabel!

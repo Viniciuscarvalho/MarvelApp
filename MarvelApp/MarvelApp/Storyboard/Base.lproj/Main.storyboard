@@ -33,7 +33,7 @@
         <!--Characters-->
         <scene sceneID="4OH-Rv-uvn">
             <objects>
-                <viewController id="xX1-d2-G1U" customClass="HeroesViewController" customModule="MarvelApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="xX1-d2-G1U" customClass="CharactersViewController" customModule="MarvelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cic-Sy-bwl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -48,7 +48,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeroesCollectionViewCell" id="f2g-Kx-5mL" customClass="HeroesCollectionViewCell" customModule="MarvelApp" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeroesCollectionViewCell" id="f2g-Kx-5mL" customClass="CharactersCollectionViewCell" customModule="MarvelApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="175" height="175"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -108,7 +108,7 @@
         <!--Detail-->
         <scene sceneID="Mjb-mo-DpV">
             <objects>
-                <viewController title="Detail" id="H1R-8a-V23" customClass="HeroesDetailViewController" customModule="MarvelApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Detail" id="H1R-8a-V23" customClass="CharactersDetailViewController" customModule="MarvelApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WIm-4l-UwR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -131,7 +131,7 @@
                                     <constraint firstAttribute="width" constant="375" id="WQw-0P-CbE"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeroesDetailCell" rowHeight="85" id="3dq-UR-aPu" customClass="HeroesDetailCell" customModule="MarvelApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CharactersDetailCell" rowHeight="85" id="3dq-UR-aPu" customClass="CharactersDetailCell" customModule="MarvelApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3dq-UR-aPu" id="7ia-Ke-WsJ">
