@@ -80,8 +80,8 @@ extension CharactersViewController: UICollectionViewDataSource {
 
 extension CharactersViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellHeight = collectionView.bounds.height / 2.5
-        let collectionPadding = CGFloat(45)
+        let cellHeight = collectionView.bounds.height / 2
+        let collectionPadding = CGFloat(35)
         let collectionWidth = collectionView.bounds.width - collectionPadding
         let cellWidth = collectionWidth / 2
         
