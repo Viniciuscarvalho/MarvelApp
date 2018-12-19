@@ -51,19 +51,71 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
         return button
     }()
     
-    //Build view of snapkit
+    override init(frame: CGRect = .zero) {
+        super.init(frame: frame)
+        installFavoriteAction()
+        buildHierarchy()
+        buildConstraints()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: content.layer.cornerRadius).cgPath
+    }
+    
+    //Build View
     func buildHierarchy() {
         addSubview(content)
         content.addSubview(photo)
         content.addSubview(footer)
         content.addSubview(name)
         content.addSubview(favorite)
+        installShadow()
     }
     
     func buildConstraints() {
         self.content.snp.makeConstraints { make in
             make.edges.equalTo(self)
         }
+        
+        self.photo.snp.makeConstraints { make in
+            make.edges.height.equalTo(content.self)
+            make.edges.leading.equalTo(content.self)
+            make.edges.trailing.equalTo(content.self)
+        }
+        
+        self.footer.snp.makeConstraints { make in
+            make.edges.leading.equalTo(content.self)
+            make.edges.trailing.equalTo(content.self)
+            make.edges.bottom.equalTo(content.self)
+            make.edges.top.equalTo(photo.snp.bottom)
+        }
+        
+        self.name.snp.makeConstraints { make in
+            make.edges.leading.equalTo(footer.snp.leading).offset(Metric.small)
+            make.edges.top.equalTo(footer.snp.top).offset(Metric.small)
+            make.edges.trailing.equalTo(favorite.snp.leading).offset(-Metric.small)
+            make.edges.bottom.equalTo(favorite.snp.bottom).offset(-Metric.small)
+        }
+        
+        self.favorite.snp.makeConstraints { make in
+            make.width.equalTo(Metric.large)
+            make.centerY.equalTo(name.snp.centerY)
+            make.trailing.equalTo(footer.snp.trailing).offset(-Metric.small)
+        }
+        
+    }
+    
+    private func installShadow() {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize.zero
+        layer.shadowRadius = 1.2
+        layer.shadowOpacity = 0.2
+        layer.masksToBounds = false
     }
     
     //Favorite functions
