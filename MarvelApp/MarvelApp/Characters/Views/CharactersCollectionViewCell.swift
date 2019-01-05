@@ -38,11 +38,14 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
     private let name: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.textColor = UIColor.yellow
         return label
     }()
     
     private let footer: UIView = {
         let view = UIView()
+        let blueDark = UIColor(red: 44/255.0, green: 48/255.0, blue: 73/255.0, alpha: 1.0)
+        view.backgroundColor = blueDark
         return view
     }()
     
