@@ -115,27 +115,6 @@ extension CharactersViewController: UICollectionViewDelegate {
         self.performSegue(withIdentifier: "detailCharacterSegue", sender: indexPath.row)
     }
 }
-extension CharactersViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.viewModel?.searchString = searchText
-    }
-    
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.setShowsCancelButton(true, animated: true)
-        return true
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text?.removeAll()
-        self.viewModel?.searchString = nil
-        searchBar.setShowsCancelButton(false, animated: true)
-        searchBar.resignFirstResponder()
-    }
-}
 
 extension CharactersViewController: CharactersViewModelLoadable {
     func reloadElements() {
