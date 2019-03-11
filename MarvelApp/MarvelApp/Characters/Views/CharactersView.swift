@@ -6,7 +6,6 @@
 //  Copyright © 2018 Vinicius Carvalho. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 

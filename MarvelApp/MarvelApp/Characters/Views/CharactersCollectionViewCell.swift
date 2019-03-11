@@ -15,6 +15,8 @@ protocol FavoriteDelegate: class {
 
 final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
     
+    var character: Character
+    
     //Build elements on view
     private let content: UIView = {
         let view = UIView()
@@ -144,13 +146,13 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
     }
 
     func setup(character: Character, viewModel: CharactersViewModelProtocol? = nil) {
-//        self.character = character
-//        self.viewModel = viewModel
-//        self.heroesTitle?.text = character.name
-//        self.heroesTitle?.font = UIFont(name: "Avenir", size: 16)
-//        if let path = character.thumbnail?.path, let ext = character.thumbnail?.extension {
-//            self.imageView?.imageFromServerURL(urlString: "\(path).\(ext)")
-//        }
+        self.character = character
+        self.viewModel = viewModel
+        self.heroesTitle?.text = character.name
+        self.heroesTitle?.font = UIFont(name: "Avenir", size: 16)
+        if let path = character.thumbnail?.path, let ext = character.thumbnail?.extension {
+            self.imageView?.imageFromServerURL(urlString: "\(path).\(ext)")
+        }
         self.favoriteAction(character: character)
         
     }
