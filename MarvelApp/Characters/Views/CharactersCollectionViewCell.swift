@@ -27,7 +27,7 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
         return view
     }()
     
-    private let photo: ImageViewAsync = {
+    let photo: ImageViewAsync = {
         let imageView = ImageViewAsync()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
@@ -127,17 +127,17 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
     }
     
     //Favorite functions
-    //    func favoriteAction(character: Character) {
-    //        let id = "F\(character.id)"
-    //
-    //        DispatchQueue.main.async {
-    //            if let status = UserDefaults.standard.value(forKey: id) as? Bool {
-    //                if status {
-    //                    //self.favoriteIcon.image = Assets.favoriteFull.image
-    //                }
-    //            }
-    //        }
-    //    }
+        func favoriteAction(character: Character) {
+            let id = "F\(character.id)"
+    
+            DispatchQueue.main.async {
+                if let status = UserDefaults.standard.value(forKey: id) as? Bool {
+                    if status {
+                        //self.favoriteIcon.image = Assets.favoriteFull.image
+                    }
+                }
+            }
+        }
     
     func addFavoriteAction(action: @escaping () -> Void) {
         favoriteAction = action
@@ -154,6 +154,7 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
     func setup(character: Character, viewModel: CharactersViewModelProtocol? = nil) {
         self.character = character
         self.viewModel = viewModel
+
         self.favoriteAction(character: character)
         self.name.text = character.name
         self.name.font = UIFont(name: "Avenir", size: 16)
@@ -161,6 +162,10 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
             self.photo.imageFromServerURL(urlString: "\(path).\(ext)")
         }
         
+    }
+    
+    public func image() -> UIImage? {
+        return photo.image
     }
     
 }

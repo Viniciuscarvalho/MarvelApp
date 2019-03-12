@@ -25,7 +25,7 @@ final class CharactersViewModel: CharactersViewModelProtocol, CharactersManagerD
     fileprivate var managerProvider: CharactersManager?
     fileprivate var loadableData: CharactersViewModelLoadable?
     fileprivate var searchResult : [Character]?
-    let favoriteImage: UIImage
+//    let favoriteImage: UIImage
     
     var searchString: String? {
         didSet {
@@ -45,11 +45,11 @@ final class CharactersViewModel: CharactersViewModelProtocol, CharactersManagerD
     }
     
     func setup() {
-        self.managerProvider = CharactersManager(delegate: self)
+        managerProvider = CharactersManager(delegate: self)
     }
     
     func loadData() {
-        self.managerProvider?.getPage()
+        managerProvider?.getPage()
     }
     
     func countData() -> Int {
