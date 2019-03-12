@@ -20,7 +20,7 @@ class CharactersView: UIView, CodeView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //var searchBar: SearchBar = SearchBar()
+    var searchBar: SearchBar = SearchBar()
     
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: frame, collectionViewLayout: flowLayout)
@@ -37,10 +37,18 @@ class CharactersView: UIView, CodeView {
     }()
     
     func buildHierarchy() {
-        self.addSubview(self.collectionView)
+        self.addSubview(collectionView)
+        self.addSubview(searchBar)
     }
     
     func buildConstraints() {
+        self.searchBar.snp.makeConstraints { make in
+            make.left.equalTo(self)
+            make.right.equalTo(self)
+            make.top.equalTo(self)
+        }
+        
+        
         self.collectionView.snp.makeConstraints { make in
             make.left.equalTo(self)
             make.right.equalTo(self)

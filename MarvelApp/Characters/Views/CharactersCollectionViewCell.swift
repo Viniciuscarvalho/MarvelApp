@@ -15,7 +15,8 @@ protocol FavoriteDelegate: class {
 
 final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
     
-    var character: Character
+    private var character: Character?
+    private var viewModel: CharactersViewModelProtocol?
     
     //Build elements on view
     private let content: UIView = {
@@ -26,8 +27,8 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
         return view
     }()
     
-    private let photo: UIImageView = {
-        let imageView = UIImageView()
+    private let photo: ImageViewAsync = {
+        let imageView = ImageViewAsync()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = Metric.extraSmall
@@ -37,11 +38,14 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
     private let name: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.textColor = UIColor.yellow
         return label
     }()
     
     private let footer: UIView = {
         let view = UIView()
+        let blueDark = UIColor(red: 44/255.0, green: 48/255.0, blue: 73/255.0, alpha: 1.0)
+        view.backgroundColor = blueDark
         return view
     }()
     
@@ -52,6 +56,8 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
         button.addTarget(self, action: #selector(didTouchAtFavorite), for: .touchUpInside)
         return button
     }()
+    
+    private var favoriteAction: () -> Void = {}
     
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
@@ -121,17 +127,17 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
     }
     
     //Favorite functions
-    func favoriteAction(character: Character) {
-        let id = "F\(character.id)"
-        
-        DispatchQueue.main.async {
-            if let status = UserDefaults.standard.value(forKey: id) as? Bool {
-                if status {
-                    //self.favoriteIcon.image = Assets.favoriteFull.image
-                }
-            }
-        }
-    }
+    //    func favoriteAction(character: Character) {
+    //        let id = "F\(character.id)"
+    //
+    //        DispatchQueue.main.async {
+    //            if let status = UserDefaults.standard.value(forKey: id) as? Bool {
+    //                if status {
+    //                    //self.favoriteIcon.image = Assets.favoriteFull.image
+    //                }
+    //            }
+    //        }
+    //    }
     
     func addFavoriteAction(action: @escaping () -> Void) {
         favoriteAction = action
@@ -142,19 +148,19 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
     }
     
     @objc private func didTouchAtFavorite() {
-        favoriteAction(character: character)
+        favoriteAction()
     }
-
+    
     func setup(character: Character, viewModel: CharactersViewModelProtocol? = nil) {
         self.character = character
         self.viewModel = viewModel
-        self.heroesTitle?.text = character.name
-        self.heroesTitle?.font = UIFont(name: "Avenir", size: 16)
-        if let path = character.thumbnail?.path, let ext = character.thumbnail?.extension {
-            self.imageView?.imageFromServerURL(urlString: "\(path).\(ext)")
-        }
         self.favoriteAction(character: character)
+        self.name.text = character.name
+        self.name.font = UIFont(name: "Avenir", size: 16)
+        if let path = character.thumbnail?.path, let ext = character.thumbnail?.extension {
+            self.photo.imageFromServerURL(urlString: "\(path).\(ext)")
+        }
         
     }
-
+    
 }
