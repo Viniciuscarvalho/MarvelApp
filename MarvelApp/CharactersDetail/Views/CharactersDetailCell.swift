@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Reusable
 
 final class CharactersDetailCell: UITableViewCell, CodeView {
     
@@ -27,7 +28,7 @@ final class CharactersDetailCell: UITableViewCell, CodeView {
     }()
     
     init() {
-        super.init(style: <#T##UITableViewCellStyle#>, reuseIdentifier: <#T##String?#>)
+        super.init(style: .default, reuseIdentifier: "")
         buildHierarchy()
         buildConstraints()
     }

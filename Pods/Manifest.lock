@@ -12,6 +12,11 @@ PODS:
     - iOSSnapshotTestCase (~> 4.0)
     - Nimble (~> 7.0)
   - Quick (1.3.2)
+  - Reusable (4.0.5):
+    - Reusable/Storyboard (= 4.0.5)
+    - Reusable/View (= 4.0.5)
+  - Reusable/Storyboard (4.0.5)
+  - Reusable/View (4.0.5)
   - SnapKit (4.0.1)
 
 DEPENDENCIES:
@@ -19,6 +24,7 @@ DEPENDENCIES:
   - Nimble
   - Nimble-Snapshots
   - Quick
+  - Reusable
   - SnapKit (~> 4.0.0)
 
 SPEC REPOS:
@@ -28,6 +34,7 @@ SPEC REPOS:
     - Nimble
     - Nimble-Snapshots
     - Quick
+    - Reusable
     - SnapKit
 
 SPEC CHECKSUMS:
@@ -36,8 +43,9 @@ SPEC CHECKSUMS:
   Nimble: 04f732da099ea4d153122aec8c2a88fd0c7219ae
   Nimble-Snapshots: 79394f8d0aea3df54bd5ff78ee9dff05a523a09c
   Quick: 2623cb30d7a7f41ca62f684f679586558f483d46
+  Reusable: 188be1a54ac0691bc66e5bb24ec6eb91971b315b
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
 
-PODFILE CHECKSUM: de47b90fa824406555e2c38d2f329c9113643360
+PODFILE CHECKSUM: 101486e7dcfc6528e7bea902859e5becf12bb4e0
 
 COCOAPODS: 1.5.3
