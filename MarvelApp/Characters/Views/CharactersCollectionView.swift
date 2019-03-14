@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class CharactersView: UIView, CodeView {
+class CharactersCollectionView: UIView, CodeView {
     
     init() {
         super.init(frame: .zero)
@@ -56,5 +56,12 @@ class CharactersView: UIView, CodeView {
             make.bottom.equalTo(self)
         }
     }
-    
+}
+
+extension CharactersCollectionView: CharactersViewModelLoadable {
+    func reloadElements() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
 }

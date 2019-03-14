@@ -19,6 +19,9 @@ class CharactersDetailViewController: UIViewController {
         super.viewDidLoad()
         tableView.reloadData()
         loadFavorite()
+        let backButton = UIBarButtonItem()
+        backButton.title = "Back"
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
     
     @IBAction func didFavorite(_ sender: UIButton) {

@@ -12,9 +12,6 @@ import Reusable
 
 final class CharactersDetailCell: UITableViewCell, CodeView {
     
-//    @IBOutlet fileprivate var titleLabel: UILabel!
-//    @IBOutlet fileprivate var txtLabel: UILabel!
-    
     //Build elements on view
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -22,7 +19,7 @@ final class CharactersDetailCell: UITableViewCell, CodeView {
         return label
     }()
     
-    private let textLabel: UILabel = {
+    private let txtLabel: UILabel = {
         let text = UILabel()
         return text
     }()
@@ -39,7 +36,7 @@ final class CharactersDetailCell: UITableViewCell, CodeView {
     
     func buildHierarchy() {
         contentView.addSubview(titleLabel)
-        contentView.addSubview(textLabel)
+        contentView.addSubview(txtLabel)
     }
     
     func buildConstraints() {
@@ -47,10 +44,10 @@ final class CharactersDetailCell: UITableViewCell, CodeView {
             make.edges.centerX.equalTo(self)
             make.edges.leading.equalTo(16)
             make.edges.top.equalTo(16)
-            make.edges.bottom.equalTo(textLabel.snp.bottom).offset(8)
+            make.edges.bottom.equalTo(txtLabel.snp.bottom).offset(8)
         }
         
-        self.textLabel.snp.makeConstraints { make in
+        self.txtLabel.snp.makeConstraints { make in
             make.edges.centerX.equalTo(self)
             make.edges.leading.equalTo(16)
             make.edges.bottom.equalTo(16)
@@ -60,7 +57,7 @@ final class CharactersDetailCell: UITableViewCell, CodeView {
     
     private func setup(title: String?, text: String?) {
         titleLabel.text = title
-        textLabel.text = text
+        txtLabel.text = text
         
     }
     

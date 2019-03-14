@@ -10,32 +10,39 @@ import UIKit
 
 final class CharactersViewController: UIViewController {
     
-    @IBOutlet private var collectionView: UICollectionView!
-    @IBOutlet weak var load: UIActivityIndicatorView!
-    
     fileprivate var originFrame: CGRect?
     fileprivate var originImage: UIImage?
     
     fileprivate var viewModel: CharactersViewModelProtocol?
     
+    private var charactersCollectionView: CharactersCollectionView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Characters"
-        self.viewModel = CharactersViewModel(loadableData: self)
+        self.charactersCollectionView = CharactersCollectionView()
+        self.viewModel = CharactersViewModel(loadableData: self as! CharactersViewModelLoadable)
         self.viewModel?.loadData()
-        self.registerCell()
+        self.charactersCollectionView?.collectionView.delegate = self
+        self.charactersCollectionView?.collectionView.dataSource = self
+        view.addSubview(activityLoad)
+        view.addSubview(charactersCollectionView!)
         self.navigationController?.delegate = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.reloadElements()
+        charactersCollectionView?.reloadElements()
     }
     
-    func registerCell() {
-        let nib = UINib(nibName: "CharactersCollectionViewCell", bundle: nil)
-        self.collectionView.register(nib, forCellWithReuseIdentifier: "CharactersCollectionViewCell")
-    }
+    lazy var activityLoad: UIActivityIndicatorView = {
+        let load = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        load.center = view.center
+        load.hidesWhenStopped = false
+        load.startAnimating()
+        return load
+    }()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "detailCharacterSegue" else { return }
@@ -56,7 +63,7 @@ extension CharactersViewController: UICollectionViewDataSource {
                         numberOfItemsInSection section: Int) -> Int {
         let total = self.viewModel?.countData() ?? 0
         if total > 0 {
-            load.stopAnimating()
+            activityLoad.stopAnimating()
         }
         return total
     }
@@ -116,12 +123,5 @@ extension CharactersViewController: UICollectionViewDelegate {
     }
 }
 
-extension CharactersViewController: CharactersViewModelLoadable {
-    func reloadElements() {
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
-    }
-}
 
 
