@@ -13,11 +13,6 @@ final class NavigationController: UINavigationController {
         return nil
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibNumbleOrNil: Bundle?)
-    {
-        super.init(nibName: nibNameOrNil, bundle: nibNumbleOrNil)
-    }
-    
     private func setupAppearance() {
         self.navigationBar.barTintColor = .red
         self.navigationBar.isTranslucent = false

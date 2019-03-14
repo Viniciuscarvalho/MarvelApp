@@ -25,7 +25,6 @@ final class CharactersViewModel: CharactersViewModelProtocol, CharactersManagerD
     fileprivate var managerProvider: CharactersManager?
     fileprivate var loadableData: CharactersViewModelLoadable?
     fileprivate var searchResult : [Character]?
-//    let favoriteImage: UIImage
     
     var searchString: String? {
         didSet {

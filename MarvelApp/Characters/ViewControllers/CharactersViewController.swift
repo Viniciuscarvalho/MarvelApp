@@ -15,25 +15,25 @@ final class CharactersViewController: UIViewController {
     
     fileprivate var viewModel: CharactersViewModelProtocol?
     
-    private var charactersCollectionView: CharactersCollectionView?
+    private var charactersCollectionView: CharactersCollectionView
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Characters"
         self.charactersCollectionView = CharactersCollectionView()
-        self.viewModel = CharactersViewModel(loadableData: self as! CharactersViewModelLoadable)
+        self.viewModel = CharactersViewModel(loadableData: charactersCollectionView)
         self.viewModel?.loadData()
-        self.charactersCollectionView?.collectionView.delegate = self
-        self.charactersCollectionView?.collectionView.dataSource = self
+        self.charactersCollectionView.collectionView.delegate = self
+        self.charactersCollectionView.collectionView.dataSource = self
         view.addSubview(activityLoad)
-        view.addSubview(charactersCollectionView!)
+        view.addSubview(charactersCollectionView)
         self.navigationController?.delegate = self
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        charactersCollectionView?.reloadElements()
+        charactersCollectionView.reloadElements()
     }
     
     lazy var activityLoad: UIActivityIndicatorView = {
