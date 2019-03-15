@@ -15,20 +15,17 @@ final class CharactersViewController: UIViewController {
     
     fileprivate var viewModel: CharactersViewModelProtocol?
     
-    private var charactersCollectionView: CharactersCollectionView
+    private var charactersCollectionView = CharactersCollectionView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Characters"
-        self.charactersCollectionView = CharactersCollectionView()
         self.viewModel = CharactersViewModel(loadableData: charactersCollectionView)
         self.viewModel?.loadData()
         self.charactersCollectionView.collectionView.delegate = self
         self.charactersCollectionView.collectionView.dataSource = self
         view.addSubview(activityLoad)
         view.addSubview(charactersCollectionView)
-        self.navigationController?.delegate = self
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,22 +36,22 @@ final class CharactersViewController: UIViewController {
     lazy var activityLoad: UIActivityIndicatorView = {
         let load = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
         load.center = view.center
-        load.hidesWhenStopped = false
+        //load.hidesWhenStopped = false
         load.startAnimating()
         return load
     }()
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "detailCharacterSegue" else { return }
-        if let index = sender as? Int {
-            guard let destination = segue.destination as? CharactersDetailViewController else { return }
-            guard let item = self.viewModel?.character(index: index) else { return }
-            destination.viewModel = CharactersDetailViewModel(character: item)
-        } else if let item = sender as? Character {
-            guard let destination = segue.destination as? CharactersDetailViewController else { return }
-            destination.viewModel = CharactersDetailViewModel(character: item)
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        guard segue.identifier == "detailCharacterSegue" else { return }
+//        if let index = sender as? Int {
+//            guard let destination = segue.destination as? CharactersDetailViewController else { return }
+//            guard let item = self.viewModel?.character(index: index) else { return }
+//            destination.viewModel = CharactersDetailViewModel(character: item)
+//        } else if let item = sender as? Character {
+//            guard let destination = segue.destination as? CharactersDetailViewController else { return }
+//            destination.viewModel = CharactersDetailViewModel(character: item)
+//        }
+//    }
 }
 
 extension CharactersViewController: UICollectionViewDataSource {
