@@ -2,17 +2,20 @@
 
 This application is intended to list Super Heroes being presented on [Marvel API](https://developer.marvel.com/)
 
+## Architecture
+
 I started structuring the project with MVC, but then I saw that it would have an approach and grow better structured with MVVM where I could separate a logic in the ViewModel layer, respecting the principles of design patterns like SRP and Observable.
 
-## Enviroment
+## Requirements
 
-- Xcode 9.3
-- Swift 4
+- Xcode 10.2
+- Swift 4+
 - No libs
 
-###Improvments
+## Improvments
 
-- Add more tests units 
+- Implement tests in logic of business layer;
+- Implement UI Tests
 
 ### Important!!
 
