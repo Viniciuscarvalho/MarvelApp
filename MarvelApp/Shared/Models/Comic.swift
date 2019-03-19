@@ -9,20 +9,20 @@
 import Foundation
 
 protocol BaseItem {
-    var name: String { get set }
-    var description: String { get set }
+    var name: String? { get set }
+    var description: String? { get set }
 }
 
 class Comic: ResourceURI, BaseItem {
     
     var resourceURI: String!
-    var name: String
+    var name: String?
     var id: Int?
     var digitalId: Int?
     var title: String?
     var diamondCode: String?
     var issueNumber: Int?
-    var description: String
+    var description: String?
     var variantDescription: String?
     var dates: [DateObject]?
     var thumbnail: Thumbnail?

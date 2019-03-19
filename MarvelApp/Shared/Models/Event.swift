@@ -11,10 +11,10 @@ import Foundation
 class Event: Codable, BaseItem {
     
     var resourceURI: String!
-    var name: String
+    var name: String?
     var id: Int?
     var title: String?
-    var description: String
+    var description: String?
     var urls: [Url]?
     var modified: String?
     var start: String?
