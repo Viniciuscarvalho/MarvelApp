@@ -39,11 +39,11 @@ struct Character: Hashable, Codable, BaseItem {
     }
     
     let id: Int
-    var name: String
-    var description: String
+    var name: String?
+    var description: String?
     let modified: String
     let thumbnail: Thumbnail?
-    let resourceURI: String
+    let resourceURI: String!
     let comics: CharacterComics?
     let series: CharacterSeries?
     let stories: CharacterStories?

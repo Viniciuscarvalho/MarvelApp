@@ -11,10 +11,10 @@ import Foundation
 class Story: ResourceURI, BaseItem {
     
     var resourceURI : String!
-    var name : String
+    var name : String?
     var id: Int?
     var title: String?
-    var description: String
+    var description: String?
     var type: String?
     var modified: String?
     var thumbnail: Thumbnail?
