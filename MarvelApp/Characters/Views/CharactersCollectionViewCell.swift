@@ -161,13 +161,13 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusab
         self.favoriteAction(character: character)
         self.name.text = character.name
         self.name.font = UIFont(name: "Avenir", size: 16)
-        //        if let path = character.thumbnail?.path, let ext = character.thumbnail?.extension {
-        //            self.photo.imageFromServerURL(urlString: "\(path).\(ext)")
-        //        }
+        if let path = character.thumbnail?.path, let ext = character.thumbnail?.extension {
+            self.photo.imageFromServerURL(urlString: "\(path).\(ext)")
+        }
     }
     
-    //    public func image() -> UIImage? {
-    //        return photo.image
-    //    }
+    public func image() -> UIImage? {
+        return photo.image
+    }
     
 }
