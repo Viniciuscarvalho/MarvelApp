@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Reusable
 
 final class CharactersViewController: UIViewController {
     
@@ -24,8 +25,13 @@ final class CharactersViewController: UIViewController {
         self.viewModel?.loadData()
         self.charactersCollectionView.collectionView.delegate = self
         self.charactersCollectionView.collectionView.dataSource = self
-        view.addSubview(activityLoad)
-        view.addSubview(charactersCollectionView)
+//        view.addSubview(activityLoad)
+//        view.addSubview(charactersCollectionView)
+        charactersCollectionView.collectionView.register(cellType: CharactersCollectionViewCell.self)
+    }
+    
+    override func loadView() {
+        self.view = charactersCollectionView
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +42,6 @@ final class CharactersViewController: UIViewController {
     lazy var activityLoad: UIActivityIndicatorView = {
         let load = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
         load.center = view.center
-        //load.hidesWhenStopped = false
         load.startAnimating()
         return load
     }()
@@ -66,11 +71,10 @@ extension CharactersViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CharactersCollectionViewCell.self), for: indexPath)
-                
-        if let characterCell = cell as? CharactersCollectionViewCell,
-            let character = self.viewModel?.character(index: indexPath.row) {
-            characterCell.setup(character: character, viewModel: self.viewModel)
+        let cell: CharactersCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+
+        if let character = self.viewModel?.character(index: indexPath.row) {
+            cell.setup(character: character, viewModel: self.viewModel)
         }
         return cell
     }
@@ -95,7 +99,6 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout {
 
 extension CharactersViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
         guard let frame = self.originFrame else { return nil }
         guard let image = self.originImage else { return nil }
         
@@ -110,13 +113,13 @@ extension CharactersViewController: UINavigationControllerDelegate {
 
 extension CharactersViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let theAttributes = collectionView.layoutAttributesForItem(at: indexPath)
-        if let cell = collectionView.cellForItem(at: indexPath) as? CharactersCollectionViewCell,
-            let frame = theAttributes?.frame {
-            self.originImage = cell.image()
-            self.originFrame = collectionView.convert(frame, to: collectionView.superview)
-        }
-        self.performSegue(withIdentifier: "detailCharacterSegue", sender: indexPath.row)
+//        let theAttributes = collectionView.layoutAttributesForItem(at: indexPath)
+//        if let cell = collectionView.cellForItem(at: indexPath) as? CharactersCollectionViewCell,
+//            let frame = theAttributes?.frame {
+////            self.originImage = cell.image()
+//            self.originFrame = collectionView.convert(frame, to: collectionView.superview)
+//        }
+//        self.performSegue(withIdentifier: "detailCharacterSegue", sender: indexPath.row)
     }
 }
 

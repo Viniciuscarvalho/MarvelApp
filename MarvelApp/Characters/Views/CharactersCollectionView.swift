@@ -48,7 +48,6 @@ class CharactersCollectionView: UIView, CodeView {
             make.top.equalTo(self)
         }
         
-        
         self.collectionView.snp.makeConstraints { make in
             make.left.equalTo(self)
             make.right.equalTo(self)

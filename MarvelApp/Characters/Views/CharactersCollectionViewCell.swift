@@ -8,12 +8,13 @@
 
 import UIKit
 import SnapKit
+import Reusable
 
 protocol FavoriteDelegate: class {
     func save(character: Character?)
 }
 
-final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
+final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusable {
     
     private var character: Character?
     private var viewModel: CharactersViewModelProtocol?
@@ -51,8 +52,8 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
     
     private let favorite: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "Action/HeartOutline"), for: .normal)
-        button.tintColor = .black
+        button.setImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
+        button.tintColor = .gray
         button.addTarget(self, action: #selector(didTouchAtFavorite), for: .touchUpInside)
         return button
     }()
@@ -90,30 +91,32 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
             make.edges.equalTo(self)
         }
         
+        self.name.snp.makeConstraints { make in
+            make.left.equalTo(content.self).offset(Metric.small)
+            make.top.equalTo(content.self).offset(Metric.small)
+            make.right.equalTo(content.self).offset(Metric.small)
+            make.bottom.equalTo(content.self).offset(Metric.small)
+        }
+        
         self.photo.snp.makeConstraints { make in
-            make.edges.height.equalTo(content.self)
-            make.edges.leading.equalTo(content.self)
-            make.edges.trailing.equalTo(content.self)
+            make.height.equalTo(content.self)
+            make.leading.equalTo(content.self)
+            make.trailing.equalTo(content.self)
+            make.bottom.equalTo(footer.snp.top)
         }
         
         self.footer.snp.makeConstraints { make in
-            make.edges.leading.equalTo(content.self)
-            make.edges.trailing.equalTo(content.self)
-            make.edges.bottom.equalTo(content.self)
-            make.edges.top.equalTo(photo.snp.bottom)
-        }
-        
-        self.name.snp.makeConstraints { make in
-            make.edges.leading.equalTo(footer.snp.leading).offset(Metric.small)
-            make.edges.top.equalTo(footer.snp.top).offset(Metric.small)
-            make.edges.trailing.equalTo(favorite.snp.leading).offset(-Metric.small)
-            make.edges.bottom.equalTo(favorite.snp.bottom).offset(-Metric.small)
+            make.height.equalTo(50)
+            make.left.equalTo(content.self)
+            make.bottom.equalTo(content.self)
+            make.top.equalTo(photo.snp.bottom)
+            make.right.equalTo(content.self)
         }
         
         self.favorite.snp.makeConstraints { make in
             make.width.equalTo(Metric.large)
             make.centerY.equalTo(name.snp.centerY)
-            make.trailing.equalTo(footer.snp.trailing).offset(-Metric.small)
+            make.trailing.equalTo(footer.snp.trailing).offset(Metric.small)
         }
         
     }
@@ -127,17 +130,17 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
     }
     
     //Favorite functions
-        func favoriteAction(character: Character) {
-            let id = "F\(character.id)"
-    
-            DispatchQueue.main.async {
-                if let status = UserDefaults.standard.value(forKey: id) as? Bool {
-                    if status {
-                        //self.favoriteIcon.image = Assets.favoriteFull.image
-                    }
+    func favoriteAction(character: Character) {
+        let id = "F\(character.id)"
+        
+        DispatchQueue.main.async {
+            if let status = UserDefaults.standard.value(forKey: id) as? Bool {
+                if status {
+                    //self.favoriteIcon.image = Assets.favoriteFull.image
                 }
             }
         }
+    }
     
     func addFavoriteAction(action: @escaping () -> Void) {
         favoriteAction = action
@@ -154,18 +157,17 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView {
     func setup(character: Character, viewModel: CharactersViewModelProtocol? = nil) {
         self.character = character
         self.viewModel = viewModel
-
+        
         self.favoriteAction(character: character)
         self.name.text = character.name
         self.name.font = UIFont(name: "Avenir", size: 16)
-        if let path = character.thumbnail?.path, let ext = character.thumbnail?.extension {
-            self.photo.imageFromServerURL(urlString: "\(path).\(ext)")
-        }
-        
+        //        if let path = character.thumbnail?.path, let ext = character.thumbnail?.extension {
+        //            self.photo.imageFromServerURL(urlString: "\(path).\(ext)")
+        //        }
     }
     
-    public func image() -> UIImage? {
-        return photo.image
-    }
+    //    public func image() -> UIImage? {
+    //        return photo.image
+    //    }
     
 }
