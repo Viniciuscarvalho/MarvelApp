@@ -53,13 +53,6 @@ final class CharactersViewController: UIViewController {
         reloadElements()
     }
     
-    lazy var activityLoad: UIActivityIndicatorView = {
-        let load = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
-        load.center = view.center
-        load.startAnimating()
-        return load
-    }()
-    
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        guard segue.identifier == "detailCharacterSegue" else { return }
 //        if let index = sender as? Int {
