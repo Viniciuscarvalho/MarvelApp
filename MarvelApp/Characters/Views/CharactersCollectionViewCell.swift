@@ -92,10 +92,9 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusab
         }
         
         self.name.snp.makeConstraints { make in
-            make.left.equalTo(content.self).offset(Metric.small)
-            make.top.equalTo(content.self).offset(Metric.small)
-            make.right.equalTo(content.self).offset(Metric.small)
-            make.bottom.equalTo(content.self).offset(Metric.small)
+            make.centerY.equalTo(footer.self)
+            make.left.equalTo(footer.snp.left).offset(Metric.small)
+            make.trailing.equalTo(favorite.snp.leading).offset(-Metric.small)
         }
         
         self.photo.snp.makeConstraints { make in
@@ -115,8 +114,8 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusab
         
         self.favorite.snp.makeConstraints { make in
             make.width.equalTo(Metric.large)
+            make.right.equalTo(content.self).inset(Metric.small)
             make.centerY.equalTo(name.snp.centerY)
-            make.trailing.equalTo(footer.snp.trailing).offset(Metric.small)
         }
         
     }

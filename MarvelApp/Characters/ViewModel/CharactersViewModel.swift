@@ -38,9 +38,12 @@ final class CharactersViewModel: CharactersViewModelProtocol, CharactersManagerD
         }
     }
     
-    init(loadableData: CharactersViewModelLoadable?) {
-        self.loadableData = loadableData
+    init() {
         setup()
+    }
+    
+    func setup(loadableData: CharactersViewModelLoadable?) {
+        self.loadableData = loadableData
     }
     
     func setup() {

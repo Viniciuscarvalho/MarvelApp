@@ -14,29 +14,43 @@ final class CharactersViewController: UIViewController {
     fileprivate var originFrame: CGRect?
     fileprivate var originImage: UIImage?
     
-    fileprivate var viewModel: CharactersViewModelProtocol?
+    private var viewModel: CharactersViewModelProtocol
     
     private var charactersCollectionView = CharactersCollectionView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Characters"
-        self.viewModel = CharactersViewModel(loadableData: charactersCollectionView)
-        self.viewModel?.loadData()
+        self.viewModel.loadData()
         self.charactersCollectionView.collectionView.delegate = self
         self.charactersCollectionView.collectionView.dataSource = self
-//        view.addSubview(activityLoad)
-//        view.addSubview(charactersCollectionView)
+        self.charactersCollectionView.searchBar.delegate = self
         charactersCollectionView.collectionView.register(cellType: CharactersCollectionViewCell.self)
     }
     
-    override func loadView() {
-        self.view = charactersCollectionView
+    init(viewModel: CharactersViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func loadView() {
+        super.loadView()
+        view.addSubview(charactersCollectionView)
+        
+        charactersCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        charactersCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        charactersCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        charactersCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        charactersCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        charactersCollectionView.reloadElements()
+        reloadElements()
     }
     
     lazy var activityLoad: UIActivityIndicatorView = {
@@ -63,7 +77,7 @@ extension CharactersViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        let total = self.viewModel?.countData() ?? 0
+        let total = self.viewModel.countData()
         if total > 0 {
             activityLoad.stopAnimating()
         }
@@ -73,16 +87,16 @@ extension CharactersViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: CharactersCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
 
-        if let character = self.viewModel?.character(index: indexPath.row) {
+        if let character = self.viewModel.character(index: indexPath.row) {
             cell.setup(character: character, viewModel: self.viewModel)
         }
         return cell
     }
     
     fileprivate func nextPage(index: Int) {
-        guard let total =  self.viewModel?.countData() else { return }
+        let total = self.viewModel.countData()
         guard index > Int(Double(total) * 0.7) else { return }
-        self.viewModel?.loadData()
+        self.viewModel.loadData()
     }
 }
 
@@ -116,12 +130,41 @@ extension CharactersViewController: UICollectionViewDelegate {
 //        let theAttributes = collectionView.layoutAttributesForItem(at: indexPath)
 //        if let cell = collectionView.cellForItem(at: indexPath) as? CharactersCollectionViewCell,
 //            let frame = theAttributes?.frame {
-////            self.originImage = cell.image()
+//            self.originImage = cell.image()
 //            self.originFrame = collectionView.convert(frame, to: collectionView.superview)
 //        }
 //        self.performSegue(withIdentifier: "detailCharacterSegue", sender: indexPath.row)
     }
 }
 
+extension CharactersViewController: CharactersViewModelLoadable {
+    func reloadElements() {
+        DispatchQueue.main.async {
+            self.charactersCollectionView.collectionView.reloadData()
+        }
+    }
+}
 
+extension CharactersViewController: UISearchBarDelegate {
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.viewModel.searchString = searchBar.text
+    }
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(true, animated: true)
+        return true
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text?.removeAll()
+        self.viewModel.searchString = nil
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+    }
+}
 

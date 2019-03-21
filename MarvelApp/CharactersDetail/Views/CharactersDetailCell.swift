@@ -41,17 +41,17 @@ final class CharactersDetailCell: UITableViewCell, CodeView {
     
     func buildConstraints() {
         self.titleLabel.snp.makeConstraints { make in
-            make.edges.centerX.equalTo(self)
-            make.edges.leading.equalTo(16)
-            make.edges.top.equalTo(16)
-            make.edges.bottom.equalTo(txtLabel.snp.bottom).offset(8)
+            make.centerX.equalTo(self)
+            make.leading.equalTo(Metric.large)
+            make.top.equalTo(Metric.large)
+            make.bottom.equalTo(txtLabel.snp.bottom).offset(Metric.small)
         }
         
         self.txtLabel.snp.makeConstraints { make in
-            make.edges.centerX.equalTo(self)
-            make.edges.leading.equalTo(16)
-            make.edges.bottom.equalTo(16)
-            make.edges.top.equalTo(8)
+            make.centerX.equalTo(self)
+            make.leading.equalTo(Metric.large)
+            make.bottom.equalTo(Metric.large)
+            make.top.equalTo(Metric.small)
         }
     }
     

@@ -30,15 +30,15 @@ class CharactersCollectionView: UIView, CodeView {
     
     lazy var flowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
-        flowLayout.minimumInteritemSpacing = 15
-        flowLayout.minimumLineSpacing = 15
+        flowLayout.sectionInset = UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 0 )
+        flowLayout.minimumInteritemSpacing = 4
+        flowLayout.minimumLineSpacing = 4
         return flowLayout
     }()
     
     func buildHierarchy() {
-        self.addSubview(collectionView)
         self.addSubview(searchBar)
+        self.addSubview(collectionView)
     }
     
     func buildConstraints() {
@@ -51,16 +51,9 @@ class CharactersCollectionView: UIView, CodeView {
         self.collectionView.snp.makeConstraints { make in
             make.left.equalTo(self)
             make.right.equalTo(self)
-            make.top.equalTo(56)
+            make.top.equalTo(searchBar.snp.bottom)
             make.bottom.equalTo(self)
         }
     }
 }
 
-extension CharactersCollectionView: CharactersViewModelLoadable {
-    func reloadElements() {
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
-    }
-}
