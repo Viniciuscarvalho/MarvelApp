@@ -14,21 +14,19 @@ final class CharactersViewController: UIViewController {
     fileprivate var originFrame: CGRect?
     fileprivate var originImage: UIImage?
     
-    private var viewModel: CharactersViewModelProtocol
+    var currentPage = 0
+    
+    private var viewModel: CharactersInteractorProtocol
     
     private var charactersCollectionView = CharactersCollectionView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Characters"
-        self.viewModel.loadData()
-        self.charactersCollectionView.collectionView.delegate = self
-        self.charactersCollectionView.collectionView.dataSource = self
-        self.charactersCollectionView.searchBar.delegate = self
-        charactersCollectionView.collectionView.register(cellType: CharactersCollectionViewCell.self)
+        setup()
     }
     
-    init(viewModel: CharactersViewModel) {
+    init(viewModel: CharactersInteractor) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -53,6 +51,20 @@ final class CharactersViewController: UIViewController {
         reloadElements()
     }
     
+    func setup() {
+        self.viewModel.fetchCharacters()
+        self.charactersCollectionView.collectionView.delegate = self
+        self.charactersCollectionView.collectionView.dataSource = self
+        self.charactersCollectionView.searchBar.delegate = self
+        charactersCollectionView.collectionView.register(cellType: CharactersCollectionViewCell.self)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if viewModel.countCharacters() - indexPath.row < 4 {
+            nextPage(index: currentPage)
+        }
+    }
+    
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        guard segue.identifier == "detailCharacterSegue" else { return }
 //        if let index = sender as? Int {
@@ -64,16 +76,14 @@ final class CharactersViewController: UIViewController {
 //            destination.viewModel = CharactersDetailViewModel(character: item)
 //        }
 //    }
+    
 }
 
 extension CharactersViewController: UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        let total = self.viewModel.countData()
-        if total > 0 {
-            activityLoad.stopAnimating()
-        }
+        let total = self.viewModel.countCharacters()
+        
         return total
     }
     
@@ -87,9 +97,7 @@ extension CharactersViewController: UICollectionViewDataSource {
     }
     
     fileprivate func nextPage(index: Int) {
-        let total = self.viewModel.countData()
-        guard index > Int(Double(total) * 0.7) else { return }
-        self.viewModel.loadData()
+        self.viewModel.fetchCharacters()
     }
 }
 
@@ -120,17 +128,17 @@ extension CharactersViewController: UINavigationControllerDelegate {
 
 extension CharactersViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let theAttributes = collectionView.layoutAttributesForItem(at: indexPath)
-//        if let cell = collectionView.cellForItem(at: indexPath) as? CharactersCollectionViewCell,
-//            let frame = theAttributes?.frame {
-//            self.originImage = cell.image()
-//            self.originFrame = collectionView.convert(frame, to: collectionView.superview)
-//        }
+        let theAttributes = collectionView.layoutAttributesForItem(at: indexPath)
+        if let cell = collectionView.cellForItem(at: indexPath) as? CharactersCollectionViewCell,
+            let frame = theAttributes?.frame {
+            self.originImage = cell.image()
+            self.originFrame = collectionView.convert(frame, to: collectionView.superview)
+        }
 //        self.performSegue(withIdentifier: "detailCharacterSegue", sender: indexPath.row)
     }
 }
 
-extension CharactersViewController: CharactersViewModelLoadable {
+extension CharactersViewController: CharactersInteractorLoadable {
     func reloadElements() {
         DispatchQueue.main.async {
             self.charactersCollectionView.collectionView.reloadData()

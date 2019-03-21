@@ -51,7 +51,7 @@ class CharactersManager {
         total = 0
     }
     
-    func getPage() {
+    func fetchCharactersData() {
         guard (self.total / pageSize) <= page else { return }
         
         let request = Endpoints(path: self.pathForResource, params: getParams())

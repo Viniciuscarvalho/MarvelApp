@@ -9,22 +9,24 @@
 import Foundation
 import UIKit
 
-protocol CharactersViewModelLoadable {
+protocol CharactersInteractorLoadable {
     func reloadElements()
 }
 
-protocol CharactersViewModelProtocol {
-    func loadData()
-    func countData() -> Int
+protocol CharactersInteractorProtocol {
+    func fetchCharacters()
+    func countCharacters() -> Int
     func character(index: Int) -> Character?
     var searchString : String? { get set }
 }
 
-final class CharactersViewModel: CharactersViewModelProtocol, CharactersManagerDelegate {
+final class CharactersInteractor: CharactersInteractorProtocol, CharactersManagerDelegate {
     
+    fileprivate var loadableData: CharactersInteractorLoadable?
     fileprivate var managerProvider: CharactersManager?
-    fileprivate var loadableData: CharactersViewModelLoadable?
-    fileprivate var searchResult : [Character]?
+    fileprivate var characters : [Character]?
+    
+    var fetchingNewCharacters: Bool = false
     
     var searchString: String? {
         didSet {
@@ -32,8 +34,8 @@ final class CharactersViewModel: CharactersViewModelProtocol, CharactersManagerD
                 managerProvider?.doSearch(name: searchString)
             } else {
                 managerProvider?.resetSearch()
-                managerProvider?.getPage()
-                searchResult = nil
+                managerProvider?.fetchCharactersData()
+                characters = nil
             }
         }
     }
@@ -42,7 +44,7 @@ final class CharactersViewModel: CharactersViewModelProtocol, CharactersManagerD
         setup()
     }
     
-    func setup(loadableData: CharactersViewModelLoadable?) {
+    func setup(loadableData: CharactersInteractorLoadable?) {
         self.loadableData = loadableData
     }
     
@@ -50,38 +52,38 @@ final class CharactersViewModel: CharactersViewModelProtocol, CharactersManagerD
         managerProvider = CharactersManager(delegate: self)
     }
     
-    func loadData() {
-        managerProvider?.getPage()
-    }
-    
-    func countData() -> Int {
-        if let searchHeroes = searchResult {
-            return searchHeroes.count
-        }
-        return 0
+    func fetchCharacters() {
+        managerProvider?.fetchCharactersData()
     }
     
     func character(index: Int) -> Character? {
-        if let searchHeroes = searchResult {
+        if let searchHeroes = characters {
             guard index < searchHeroes.count else { return nil }
             return searchHeroes[index]
         }
         return nil
     }
     
+    func countCharacters() -> Int {
+        if let searchHeroes = characters {
+            return searchHeroes.count
+        }
+        return 0
+    }
+    
 }
 
-extension CharactersViewModel {
+extension CharactersInteractor {
     func finishLoadPage(data: [Character]?, error: Error?) {
         guard error == nil else { return }
         guard let data = data else { return }
-        self.searchResult = data
+        self.characters = data
         loadableData?.reloadElements()
     }
     
     func searchResult(data: [Character]?, error: Error?) {
         guard error == nil else { return }
-        self.searchResult = data
+        self.characters = data
         loadableData?.reloadElements()
     }
     
