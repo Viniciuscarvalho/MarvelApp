@@ -9,20 +9,20 @@
 import Foundation
 import UIKit
 
-protocol CharactersInteractorLoadable {
+protocol CharactersViewModelLoadable {
     func reloadElements()
 }
 
-protocol CharactersInteractorProtocol {
+protocol CharactersViewModelProtocol {
     func fetchCharacters()
     func countCharacters() -> Int
     func character(index: Int) -> Character?
     var searchString : String? { get set }
 }
 
-final class CharactersInteractor: CharactersInteractorProtocol, CharactersManagerDelegate {
+final class CharactersViewModel: CharactersViewModelProtocol, CharactersManagerDelegate {
     
-    fileprivate var loadableData: CharactersInteractorLoadable?
+    fileprivate var loadableData: CharactersViewModelLoadable?
     fileprivate var managerProvider: CharactersManager?
     fileprivate var characters : [Character]?
     
@@ -44,7 +44,7 @@ final class CharactersInteractor: CharactersInteractorProtocol, CharactersManage
         setup()
     }
     
-    func setup(loadableData: CharactersInteractorLoadable?) {
+    func setup(loadableData: CharactersViewModelLoadable?) {
         self.loadableData = loadableData
     }
     
@@ -73,7 +73,7 @@ final class CharactersInteractor: CharactersInteractorProtocol, CharactersManage
     
 }
 
-extension CharactersInteractor {
+extension CharactersViewModel {
     func finishLoadPage(data: [Character]?, error: Error?) {
         guard error == nil else { return }
         guard let data = data else { return }

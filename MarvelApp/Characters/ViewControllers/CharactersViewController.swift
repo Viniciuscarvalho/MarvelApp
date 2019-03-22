@@ -16,7 +16,7 @@ final class CharactersViewController: UIViewController {
     
     var currentPage = 0
     
-    private var viewModel: CharactersInteractorProtocol
+    private var viewModel: CharactersViewModelProtocol
     
     private var charactersCollectionView = CharactersCollectionView()
     
@@ -26,7 +26,7 @@ final class CharactersViewController: UIViewController {
         setup()
     }
     
-    init(viewModel: CharactersInteractor) {
+    init(viewModel: CharactersViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -138,7 +138,7 @@ extension CharactersViewController: UICollectionViewDelegate {
     }
 }
 
-extension CharactersViewController: CharactersInteractorLoadable {
+extension CharactersViewController: CharactersViewModelLoadable {
     func reloadElements() {
         DispatchQueue.main.async {
             self.charactersCollectionView.collectionView.reloadData()

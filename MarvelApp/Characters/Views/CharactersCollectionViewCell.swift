@@ -17,7 +17,7 @@ protocol FavoriteDelegate: class {
 final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusable {
     
     private var character: Character?
-    private var viewModel: CharactersInteractorProtocol?
+    private var viewModel: CharactersViewModelProtocol?
     
     //Build elements on view
     private let content: UIView = {
@@ -153,7 +153,7 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusab
         favoriteAction()
     }
     
-    func setup(character: Character, viewModel: CharactersInteractorProtocol? = nil) {
+    func setup(character: Character, viewModel: CharactersViewModelProtocol? = nil) {
         self.character = character
         self.viewModel = viewModel
         
