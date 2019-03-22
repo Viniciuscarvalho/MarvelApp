@@ -9,20 +9,25 @@
 import UIKit
 import Reusable
 
+protocol CharactersViewControllerDelegate: class {
+    func charactersViewControllerDidSelectHero(_ selectedHero: Character)
+}
+
 final class CharactersViewController: UIViewController {
     
     fileprivate var originFrame: CGRect?
     fileprivate var originImage: UIImage?
     
     var currentPage = 0
-       
+    
+    weak var delegate: CharactersViewControllerDelegate?
+    
     private var viewModel: CharactersViewModelProtocol
     
     private var charactersCollectionView = CharactersCollectionView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Characters"
         setup()
     }
     
@@ -58,19 +63,6 @@ final class CharactersViewController: UIViewController {
         self.charactersCollectionView.searchBar.delegate = self
         charactersCollectionView.collectionView.register(cellType: CharactersCollectionViewCell.self)
     }
-    
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        guard segue.identifier == "detailCharacterSegue" else { return }
-//        if let index = sender as? Int {
-//            guard let destination = segue.destination as? CharactersDetailViewController else { return }
-//            guard let item = self.viewModel?.character(index: index) else { return }
-//            destination.viewModel = CharactersDetailViewModel(character: item)
-//        } else if let item = sender as? Character {
-//            guard let destination = segue.destination as? CharactersDetailViewController else { return }
-//            destination.viewModel = CharactersDetailViewModel(character: item)
-//        }
-//    }
     
 }
 
@@ -135,7 +127,10 @@ extension CharactersViewController: UICollectionViewDelegate {
             self.originImage = cell.image()
             self.originFrame = collectionView.convert(frame, to: collectionView.superview)
         }
-//        self.performSegue(withIdentifier: "detailCharacterSegue", sender: indexPath.row)
+        
+        if let character = self.viewModel.character(index: indexPath.row) {
+            delegate?.charactersViewControllerDidSelectHero(character)
+        }
     }
 }
 
