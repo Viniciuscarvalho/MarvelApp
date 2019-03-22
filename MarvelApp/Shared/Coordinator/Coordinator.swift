@@ -14,8 +14,8 @@ protocol CoordinatorProtocol {
 }
 
 class Coordinator: CoordinatorProtocol {
-    let navigationController: UINavigationController
     
+    let navigationController: UINavigationController
     let viewModel = CharactersViewModel()
     
     func start() {

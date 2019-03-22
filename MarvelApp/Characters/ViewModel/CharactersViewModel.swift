@@ -70,7 +70,7 @@ final class CharactersViewModel: CharactersViewModelProtocol, CharactersManagerD
         }
         return 0
     }
-    
+       
 }
 
 extension CharactersViewModel {

@@ -15,7 +15,7 @@ final class CharactersViewController: UIViewController {
     fileprivate var originImage: UIImage?
     
     var currentPage = 0
-    
+       
     private var viewModel: CharactersViewModelProtocol
     
     private var charactersCollectionView = CharactersCollectionView()
@@ -59,11 +59,6 @@ final class CharactersViewController: UIViewController {
         charactersCollectionView.collectionView.register(cellType: CharactersCollectionViewCell.self)
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if viewModel.countCharacters() - indexPath.row < 4 {
-            nextPage(index: currentPage)
-        }
-    }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        guard segue.identifier == "detailCharacterSegue" else { return }
@@ -94,6 +89,12 @@ extension CharactersViewController: UICollectionViewDataSource {
             cell.setup(character: character, viewModel: self.viewModel)
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if viewModel.countCharacters() - indexPath.row < 4 {
+            nextPage(index: currentPage)
+        }
     }
     
     fileprivate func nextPage(index: Int) {
