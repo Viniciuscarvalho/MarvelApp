@@ -135,14 +135,10 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusab
         DispatchQueue.main.async {
             if let status = UserDefaults.standard.value(forKey: id) as? Bool {
                 if status {
-                    //self.favoriteIcon.image = Assets.favoriteFull.image
+                    self.favorite.setImage(Assets.favoriteFull.image, for: .normal)
                 }
             }
         }
-    }
-    
-    func addFavoriteAction(action: @escaping () -> Void) {
-        favoriteAction = action
     }
     
     private func installFavoriteAction() {

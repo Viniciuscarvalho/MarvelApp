@@ -2,46 +2,77 @@
 //  CharactersDetailView.swift
 //  MarvelApp
 //
-//  Created by Vinicius Carvalho Marques on 10/12/18.
-//  Copyright © 2018 Vinicius Carvalho. All rights reserved.
+//  Created by vinicius.marques on 25/03/2019.
+//  Copyright © 2019 Vinicius Carvalho. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import SnapKit
 
 class CharactersDetailView: UIView, CodeView {
     
-    //Build elements on view
-    private let title: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .body)
-        label.textColor = UIColor.darkGray
-        return label
-    }()
-    
-    private let text: UILabel = {
-        let label = UILabel()
-        label.textColor = UIColor.lightGray
-        return label
-    }()
-    
-    override init(frame: CGRect = .zero) {
-        super.init(frame: frame)
-        buildHierarchy()
-        buildConstraints()
+    init() {
+        super.init(frame: .zero)
+        backgroundColor = UIColor.white
+        setupView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //Mark: Setup view
+    private let content: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    lazy var tableView: UITableView = {
+        let table = UITableView()
+        return table
+    }()
+    
+    lazy var characterImage: ImageViewAsync = {
+        let imageView = ImageViewAsync()
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = Assets.logo.image
+        return imageView
+    }()
+    
+    lazy var favorite: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(Assets.favoriteEmpty.image, for: .normal)
+        return button
+    }()
+    
     func buildHierarchy() {
-        <#code#>
+        addSubview(content)
+        content.addSubview(characterImage)
+        content.addSubview(favorite)
+        addSubview(tableView)
     }
     
     func buildConstraints() {
-        <#code#>
+        self.content.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaInsets.top)
+            make.left.right.equalTo(self)
+            make.height.equalTo(478)
+        }
+        
+        self.characterImage.snp.makeConstraints { make in
+            make.edges.equalTo(self.content)
+        }
+        
+        self.favorite.snp.makeConstraints { make in
+            make.height.width.equalTo(30)
+            make.right.equalTo(self.content).offset(-Metric.large)
+            make.bottom.equalTo(tableView.snp.top).offset(-27)
+        }
+        
+        self.tableView.snp.makeConstraints { make in
+            make.top.equalTo(self.content.snp.bottom)
+            make.left.right.bottom.equalTo(self)
+        }
     }
-    
     
 }

@@ -10,22 +10,10 @@ import UIKit
 import SnapKit
 import Reusable
 
-final class CharactersDetailCell: UITableViewCell, CodeView {
+final class CharactersDetailCell: UITableViewCell, CodeView, Reusable {
     
-    //Build elements on view
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .body)
-        return label
-    }()
-    
-    private let txtLabel: UILabel = {
-        let text = UILabel()
-        return text
-    }()
-    
-    init() {
-        super.init(style: .default, reuseIdentifier: "")
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         buildHierarchy()
         buildConstraints()
     }
@@ -34,6 +22,20 @@ final class CharactersDetailCell: UITableViewCell, CodeView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //Build elements on view
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        return label
+    }()
+    
+    private let txtLabel: UILabel = {
+        let text = UILabel()
+        text.numberOfLines = 0
+        return text
+    }()
+    
     func buildHierarchy() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(txtLabel)
@@ -41,24 +43,20 @@ final class CharactersDetailCell: UITableViewCell, CodeView {
     
     func buildConstraints() {
         self.titleLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(self)
-            make.leading.equalTo(Metric.large)
-            make.top.equalTo(Metric.large)
-            make.bottom.equalTo(txtLabel.snp.bottom).offset(Metric.small)
+            make.height.equalTo(30)
+            make.left.right.top.equalTo(contentView).offset(16)
+            make.bottom.equalTo(txtLabel.snp.bottom).offset(8)
         }
         
         self.txtLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(self)
-            make.leading.equalTo(Metric.large)
-            make.bottom.equalTo(Metric.large)
-            make.top.equalTo(Metric.small)
+            make.height.equalTo(25)
+            make.left.right.bottom.equalTo(contentView).offset(16)
         }
     }
     
     private func setup(title: String?, text: String?) {
         titleLabel.text = title
         txtLabel.text = text
-        
     }
     
     func populateCell(viewModel: BaseItem) {

@@ -7,11 +7,11 @@
 //
 
 import UIKit
+import Reusable
 
-class CharactersDetailViewController: UIViewController {
+class CharactersDetailViewController: UIViewController, UITableViewDelegate {
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var favoriteIcon: UIImageView!
+    private var charactersDetailView = CharactersDetailView()
     
     let viewModel: CharactersDetailViewModel
     
@@ -26,14 +26,24 @@ class CharactersDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.reloadData()
+        setup()
         loadFavorite()
         let backButton = UIBarButtonItem()
         backButton.title = "Back"
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
     
-    @IBAction func didFavorite(_ sender: UIButton) {
+    override func loadView() {
+        self.view = charactersDetailView
+    }
+    
+    func setup() {
+        charactersDetailView.tableView.delegate = self
+        charactersDetailView.tableView.dataSource = self
+        charactersDetailView.tableView.register(cellType: CharactersDetailCell.self)
+    }
+    
+    func didFavorite() {
         let character = viewModel.output["Character"]?.first as? Character
         save(character: character)
     }
@@ -46,13 +56,18 @@ class CharactersDetailViewController: UIViewController {
         
         if let status = UserDefaults.standard.value(forKey: id) as? Bool {
             if status {
-                favoriteIcon.image = Assets.favoriteFull.image
+                charactersDetailView.favorite.setBackgroundImage(Assets.favoriteFull.image
+                    , for: .normal)
             }
         }
     }
     
     private func setFavorite(status: Bool) {
-        favoriteIcon.image = (status ? Assets.favoriteFull.image : Assets.favoriteEmpty.image)
+        if status == true {
+            charactersDetailView.favorite.setBackgroundImage(Assets.favoriteFull.image, for: .normal)
+        } else {
+            charactersDetailView.favorite.setBackgroundImage(Assets.favoriteEmpty.image, for: .normal)
+        }
     }
     
 }
@@ -79,19 +94,19 @@ extension CharactersDetailViewController: UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CharactersDetailCell.self), for: indexPath)
         
-        if let characterDetailCell = cell as? CharactersDetailCell {
-            let item = viewModel.output.enumerated().filter({ index, _ in
-                return index == indexPath.section
-            }).map { (index, element) in
-                return element.value[indexPath.row]
+        let cell: CharactersDetailCell = tableView.dequeueReusableCell(for: indexPath)
+        
+        let item = viewModel.output.enumerated().filter({ index, _ in
+            return index == indexPath.section
+        }).map { (index, element) in
+            return element.value[indexPath.row]
             }.first
-            
-            if let item = item {
-                characterDetailCell.populateCell(viewModel: item)
-            }
+        
+        if let item = item {
+            cell.populateCell(viewModel: item)
         }
+        
         return cell
     }
 }
