@@ -44,6 +44,7 @@ final class CharactersViewController: UIViewController {
         super.loadView()
         view.addSubview(charactersCollectionView)
         
+        //Mark: Add Search with safe area and navigation bar
         charactersCollectionView.translatesAutoresizingMaskIntoConstraints = false
         charactersCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         charactersCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
@@ -165,3 +166,6 @@ extension CharactersViewController: UISearchBarDelegate {
     }
 }
 
+extension CharactersViewController {
+    
+}

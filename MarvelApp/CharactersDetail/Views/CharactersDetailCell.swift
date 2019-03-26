@@ -23,6 +23,11 @@ final class CharactersDetailCell: UITableViewCell, CodeView, Reusable {
     }
     
     //Build elements on view
+    private let content: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -37,20 +42,23 @@ final class CharactersDetailCell: UITableViewCell, CodeView, Reusable {
     }()
     
     func buildHierarchy() {
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(txtLabel)
+        addSubview(content)
+        content.addSubview(titleLabel)
+        content.addSubview(txtLabel)
     }
     
     func buildConstraints() {
+        self.content.snp.makeConstraints { make in
+            make.edges.equalTo(self)
+        }
+        
         self.titleLabel.snp.makeConstraints { make in
-            make.height.equalTo(30)
-            make.left.right.top.equalTo(contentView).offset(16)
+            make.left.right.top.equalTo(self.content).offset(16)
             make.bottom.equalTo(txtLabel.snp.bottom).offset(8)
         }
         
         self.txtLabel.snp.makeConstraints { make in
-            make.height.equalTo(25)
-            make.left.right.bottom.equalTo(contentView).offset(16)
+            make.left.right.bottom.equalTo(self.content).offset(16)
         }
     }
     

@@ -11,6 +11,8 @@ import SnapKit
 
 class CharactersDetailView: UIView, CodeView {
     
+    private var character: Character?
+    
     init() {
         super.init(frame: .zero)
         backgroundColor = UIColor.white
@@ -29,10 +31,11 @@ class CharactersDetailView: UIView, CodeView {
     
     lazy var tableView: UITableView = {
         let table = UITableView()
+        table.separatorStyle = .none
         return table
     }()
     
-    lazy var characterImage: ImageViewAsync = {
+    lazy var photo: ImageViewAsync = {
         let imageView = ImageViewAsync()
         imageView.contentMode = .scaleAspectFill
         imageView.image = Assets.logo.image
@@ -47,7 +50,7 @@ class CharactersDetailView: UIView, CodeView {
     
     func buildHierarchy() {
         addSubview(content)
-        content.addSubview(characterImage)
+        content.addSubview(photo)
         content.addSubview(favorite)
         addSubview(tableView)
     }
@@ -59,7 +62,7 @@ class CharactersDetailView: UIView, CodeView {
             make.height.equalTo(478)
         }
         
-        self.characterImage.snp.makeConstraints { make in
+        self.photo.snp.makeConstraints { make in
             make.edges.equalTo(self.content)
         }
         
@@ -75,4 +78,15 @@ class CharactersDetailView: UIView, CodeView {
         }
     }
     
+    func setup(character: Character) {
+        self.character = character
+        
+        if let path = character.thumbnail?.path, let ext = character.thumbnail?.extension {
+            self.photo.imageFromServerURL(urlString: "\(path).\(ext)")
+        }
+    }
+    
+    public func image() -> UIImage? {
+        return photo.image
+    }
 }

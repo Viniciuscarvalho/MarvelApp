@@ -9,9 +9,14 @@
 import Foundation
 
 class CharactersDetailViewModel {
+    
+    var character: Character
+    
     var output: [String: [BaseItem]]
     
     init(character: Character) {
+        self.character = character
+        
         var output = [String: [BaseItem]]()
         
         output["Character"] = [character]
