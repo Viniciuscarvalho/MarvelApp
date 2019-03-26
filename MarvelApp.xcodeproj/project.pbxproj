@@ -31,6 +31,8 @@
 		2F2171522091167500E799BF /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2171512091167500E799BF /* APIClientTests.swift */; };
 		2F21715520911A8600E799BF /* ModelsStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F21715420911A8600E799BF /* ModelsStub.swift */; };
 		2F21715720911CE600E799BF /* ModelDecodeObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F21715620911CE600E799BF /* ModelDecodeObjects.swift */; };
+		2F45912E224ADA1D00F654D9 /* FavoritedCharacterProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F45912D224ADA1D00F654D9 /* FavoritedCharacterProvider.swift */; };
+		2F459130224ADC9000F654D9 /* FavoritedCharacterRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F45912F224ADC9000F654D9 /* FavoritedCharacterRepository.swift */; };
 		2F4A6970223BF0960014075C /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4A696F223BF0960014075C /* ApplicationCoordinator.swift */; };
 		2FCF1B4021C1A51600F36993 /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCF1B3F21C1A51600F36993 /* CodeView.swift */; };
 		2FD6C0232245783800207CED /* CharactersListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD6C0222245783800207CED /* CharactersListCoordinator.swift */; };
@@ -91,6 +93,8 @@
 		2F2171512091167500E799BF /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
 		2F21715420911A8600E799BF /* ModelsStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsStub.swift; sourceTree = "<group>"; };
 		2F21715620911CE600E799BF /* ModelDecodeObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDecodeObjects.swift; sourceTree = "<group>"; };
+		2F45912D224ADA1D00F654D9 /* FavoritedCharacterProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritedCharacterProvider.swift; sourceTree = "<group>"; };
+		2F45912F224ADC9000F654D9 /* FavoritedCharacterRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritedCharacterRepository.swift; sourceTree = "<group>"; };
 		2F4A696F223BF0960014075C /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		2FCF1B3F21C1A51600F36993 /* CodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
 		2FD6C0222245783800207CED /* CharactersListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListCoordinator.swift; sourceTree = "<group>"; };
@@ -263,6 +267,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		2F45912C224AD9FE00F654D9 /* SaveManager */ = {
+			isa = PBXGroup;
+			children = (
+				2F45912D224ADA1D00F654D9 /* FavoritedCharacterProvider.swift */,
+				2F45912F224ADC9000F654D9 /* FavoritedCharacterRepository.swift */,
+			);
+			path = SaveManager;
+			sourceTree = "<group>";
+		};
 		2F4A696E223BF0480014075C /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +359,7 @@
 		EA7B402C20881261007BD37B /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2F45912C224AD9FE00F654D9 /* SaveManager */,
 				2F4A696E223BF0480014075C /* Coordinator */,
 				2FCF1B3E21C1A50300F36993 /* Protocols */,
 				2F217124208A2A6300E799BF /* Manager */,
@@ -622,6 +636,7 @@
 				EA7B4043208D24FB007BD37B /* CharactersDetailViewModel.swift in Sources */,
 				EA7B403A208B867A007BD37B /* ImageViewAsync.swift in Sources */,
 				EA1481DF21C867A40064CC1E /* Metric.swift in Sources */,
+				2F459130224ADC9000F654D9 /* FavoritedCharacterRepository.swift in Sources */,
 				2FD6C0232245783800207CED /* CharactersListCoordinator.swift in Sources */,
 				2F21710B20890DDF00E799BF /* Story.swift in Sources */,
 				2F21710D20890DEA00E799BF /* Comic.swift in Sources */,
@@ -630,6 +645,7 @@
 				2F2171002089013700E799BF /* CharactersViewController.swift in Sources */,
 				2F217126208A2A7F00E799BF /* CharacterManager.swift in Sources */,
 				2F21711120890DFD00E799BF /* Event.swift in Sources */,
+				2F45912E224ADA1D00F654D9 /* FavoritedCharacterProvider.swift in Sources */,
 				EA7B4049208D3660007BD37B /* CharactersDetailCell.swift in Sources */,
 				2FD6C0252245784C00207CED /* CharactersDetailCoordinator.swift in Sources */,
 				2F2171032089018600E799BF /* CharactersCollectionViewCell.swift in Sources */,

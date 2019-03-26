@@ -11,13 +11,15 @@ import SnapKit
 import Reusable
 
 protocol FavoriteDelegate: class {
-    func save(character: Character?)
+    func save(character: Character?) -> Bool
 }
 
 final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusable {
     
     private var character: Character?
     private var viewModel: CharactersViewModelProtocol?
+    
+    weak var saveDelegate: FavoriteDelegate?
     
     //Build elements on view
     private let content: UIView = {
@@ -57,8 +59,6 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusab
         button.addTarget(self, action: #selector(didTouchAtFavorite), for: .touchUpInside)
         return button
     }()
-    
-    private var favoriteAction: () -> Void = {}
     
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
@@ -117,7 +117,6 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusab
             make.right.equalTo(content.self).inset(Metric.small)
             make.centerY.equalTo(name.snp.centerY)
         }
-        
     }
     
     private func installShadow() {
@@ -128,31 +127,20 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusab
         layer.masksToBounds = false
     }
     
-    func favoriteAction(character: Character) {
-        let id = "F\(character.id)"
-        
-        DispatchQueue.main.async {
-            if let status = UserDefaults.standard.value(forKey: id) as? Bool {
-                if status {
-                    self.favorite.setBackgroundImage(Assets.favoriteFull.image, for: .normal)
-                }
-            }
-        }
-    }
-    
     private func installFavoriteAction() {
         favorite.addTarget(self, action: #selector(didTouchAtFavorite), for: .touchUpInside)
     }
     
     @objc private func didTouchAtFavorite() {
-        favoriteAction()
+        if let saveResult = saveDelegate?.save(character: character) {
+            setFavorite(status: saveResult)
+        }
     }
     
     func setup(character: Character, viewModel: CharactersViewModelProtocol? = nil) {
         self.character = character
         self.viewModel = viewModel
         
-        self.favoriteAction(character: character)
         self.name.text = character.name
         self.name.font = UIFont(name: "Avenir", size: 16)
         if let path = character.thumbnail?.path, let ext = character.thumbnail?.extension {

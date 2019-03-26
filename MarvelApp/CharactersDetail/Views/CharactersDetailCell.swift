@@ -37,7 +37,7 @@ final class CharactersDetailCell: UITableViewCell, CodeView, Reusable {
     
     private let txtLabel: UILabel = {
         let text = UILabel()
-        text.numberOfLines = 5
+        text.numberOfLines = 0
         return text
     }()
     

@@ -23,6 +23,7 @@ final class CharactersViewController: UIViewController {
     weak var delegate: CharactersViewControllerDelegate?
     
     private var viewModel: CharactersViewModelProtocol
+    let favoriteRepository: FavoritedCharacterRepository
     
     private var charactersCollectionView = CharactersCollectionView()
     
@@ -31,8 +32,9 @@ final class CharactersViewController: UIViewController {
         setup()
     }
     
-    init(viewModel: CharactersViewModel) {
+    init(viewModel: CharactersViewModel, repository: FavoritedCharacterRepository) {
         self.viewModel = viewModel
+        self.favoriteRepository = repository
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -77,6 +79,8 @@ extension CharactersViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: CharactersCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        
+        cell.saveDelegate = self
 
         if let character = self.viewModel.character(index: indexPath.row) {
             cell.setup(character: character, viewModel: self.viewModel)
@@ -106,29 +110,8 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension CharactersViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard let frame = self.originFrame else { return nil }
-        guard let image = self.originImage else { return nil }
-        
-        switch operation {
-        case .push:
-            return CharacterAnimation(originFrame: frame, image: image, isShow: true)
-        default:
-            return CharacterAnimation(originFrame: frame, image: image)
-        }
-    }
-}
-
 extension CharactersViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let theAttributes = collectionView.layoutAttributesForItem(at: indexPath)
-        if let cell = collectionView.cellForItem(at: indexPath) as? CharactersCollectionViewCell,
-            let frame = theAttributes?.frame {
-            self.originImage = cell.image()
-            self.originFrame = collectionView.convert(frame, to: collectionView.superview)
-        }
-        
         if let character = self.viewModel.character(index: indexPath.row) {
             delegate?.charactersViewControllerDidSelectHero(character)
         }
@@ -140,6 +123,15 @@ extension CharactersViewController: CharactersViewModelLoadable {
         DispatchQueue.main.async {
             self.charactersCollectionView.collectionView.reloadData()
         }
+    }
+}
+
+extension CharactersViewController: FavoriteDelegate {
+    func save(character: Character?) {
+        guard let item = character else { return }
+        favoriteRepository.toggleFavorite(character: item)
+        
+        return favoriteRepository.isFavorited(character: item)
     }
 }
 
@@ -164,8 +156,4 @@ extension CharactersViewController: UISearchBarDelegate {
         searchBar.setShowsCancelButton(false, animated: true)
         searchBar.resignFirstResponder()
     }
-}
-
-extension CharactersViewController {
-    
 }

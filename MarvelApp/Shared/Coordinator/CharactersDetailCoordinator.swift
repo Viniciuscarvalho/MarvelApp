@@ -19,7 +19,8 @@ class CharactersDetailCoordinator: CoordinatorProtocol {
     }
     
     func start() {
-        let charactersDetailViewController = CharactersDetailViewController(viewModel: characterDetailViewModel)
+        let repository = FavoritedCharacterRepository()
+        let charactersDetailViewController = CharactersDetailViewController(viewModel: characterDetailViewModel, repository: repository)
         presenter.pushViewController(charactersDetailViewController, animated: true)
         self.charactersDetailViewController = charactersDetailViewController
     }

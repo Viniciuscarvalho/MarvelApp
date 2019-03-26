@@ -14,8 +14,10 @@ class CharactersDetailViewController: UIViewController, UITableViewDelegate {
     private var charactersDetailView = CharactersDetailView()
     
     let viewModelDetail: CharactersDetailViewModel
+    let favoriteRepository: FavoritedCharacterRepository
     
-    init(viewModel: CharactersDetailViewModel) {
+    init(viewModel: CharactersDetailViewModel, repository: FavoritedCharacterRepository) {
+        self.favoriteRepository = repository
         self.viewModelDetail = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -27,7 +29,6 @@ class CharactersDetailViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        loadFavorite()
         charactersDetailView.setup(character: viewModelDetail.character)
         let backButton = UIBarButtonItem()
         backButton.title = "Back"
@@ -39,38 +40,12 @@ class CharactersDetailViewController: UIViewController, UITableViewDelegate {
     }
     
     func setup() {
+        charactersDetailView.saveDelegate = self
         charactersDetailView.tableView.delegate = self
         charactersDetailView.tableView.dataSource = self
         charactersDetailView.tableView.register(cellType: CharactersDetailCell.self)
     }
-    
-    func didFavorite() {
-        let character = viewModelDetail.output["Character"]?.first as? Character
-        save(character: character)
-    }
-    
-    private func loadFavorite() {
-        let character = viewModelDetail.output["Character"]?.first as? Character
-        
-        guard let item = character else { return }
-        let id = "F\(item.id)"
-        
-        if let status = UserDefaults.standard.value(forKey: id) as? Bool {
-            if status {
-                charactersDetailView.favorite.setBackgroundImage(Assets.favoriteFull.image
-                    , for: .normal)
-            }
-        }
-    }
-    
-    private func setFavorite(status: Bool) {
-        if status == true {
-            charactersDetailView.favorite.setBackgroundImage(Assets.favoriteFull.image, for: .normal)
-        } else {
-            charactersDetailView.favorite.setBackgroundImage(Assets.favoriteEmpty.image, for: .normal)
-        }
-    }
-    
+  
 }
 
 extension CharactersDetailViewController: UITableViewDataSource {
@@ -118,19 +93,14 @@ extension CharactersDetailViewController: UITableViewDataSource {
 
 extension CharactersDetailViewController: FavoriteDelegate {
     
-    func save(character: Character?) {
-        guard let character = character else { return }
-        let id = "F\(character.id)"
+    func save(character: Character?) -> Bool {
+//        let character = viewModelDetail.output["Character"]?.first as? Character
+        guard let item = character else { return }
         
-        if let status = UserDefaults.standard.value(forKey: id) as? Bool {
-            setFavorite(status: !status)
-            UserDefaults.standard.removeObject(forKey: id)
-        } else {
-            setFavorite(status: true)
-            UserDefaults.standard.set(true, forKey: id)
-        }
+        favoriteRepository.toggleFavorite(character: item)
+//        setFavorite(status: favoriteRepository.isFavorited(character: item))
         
-        UserDefaults.standard.synchronize()
+        return favoriteRepository.isFavorited(character: item)
     }
     
 }

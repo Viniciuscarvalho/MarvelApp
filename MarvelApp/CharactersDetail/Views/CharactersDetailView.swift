@@ -11,6 +11,8 @@ import SnapKit
 
 class CharactersDetailView: UIView, CodeView {
     
+    weak var saveDelegate: FavoriteDelegate?
+    
     private var character: Character?
     
     init() {
@@ -44,7 +46,9 @@ class CharactersDetailView: UIView, CodeView {
     
     lazy var favorite: UIButton = {
         let button = UIButton(type: .system)
-        button.setBackgroundImage(Assets.favoriteEmpty.image, for: .normal)
+        button.setBackgroundImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
+        button.tintColor = .gray
+        button.addTarget(self, action: #selector(didTouchAtFavorite), for: .touchUpInside)
         return button
     }()
     
@@ -75,6 +79,24 @@ class CharactersDetailView: UIView, CodeView {
         self.tableView.snp.makeConstraints { make in
             make.top.equalTo(self.content.snp.bottom)
             make.left.right.bottom.equalTo(self)
+        }
+    }
+    
+    private func installFavoriteAction() {
+        favorite.addTarget(self, action: #selector(didTouchAtFavorite), for: .touchUpInside)
+    }
+    
+    @objc private func didTouchAtFavorite() {
+        if let saveResult = saveDelegate?.save(character: character) {
+            setFavorite(status: saveResult)
+        }
+    }
+    
+    func setFavorite(status: Bool) {
+        if status == true {
+            favorite.setBackgroundImage(Assets.favoriteFull.image, for: .normal)
+        } else {
+            favorite.setBackgroundImage(Assets.favoriteEmpty.image, for: .normal)
         }
     }
     

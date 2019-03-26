@@ -20,7 +20,8 @@ class CharactersListCoordinator: CoordinatorProtocol {
     }
     
     func start() {
-        let charactersViewController = CharactersViewController(viewModel: viewModel)
+        let repository = FavoritedCharacterRepository()
+        let charactersViewController = CharactersViewController(viewModel: viewModel, repository: repository)
         charactersViewController.delegate = self
         viewModel.setup(loadableData: charactersViewController)
         charactersViewController.title = "Characters"
