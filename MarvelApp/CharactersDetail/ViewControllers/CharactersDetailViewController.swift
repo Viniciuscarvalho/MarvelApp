@@ -28,6 +28,7 @@ class CharactersDetailViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         setup()
         loadFavorite()
+        charactersDetailView.setup(character: viewModelDetail.character)
         let backButton = UIBarButtonItem()
         backButton.title = "Back"
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton

@@ -37,7 +37,7 @@ final class CharactersDetailCell: UITableViewCell, CodeView, Reusable {
     
     private let txtLabel: UILabel = {
         let text = UILabel()
-        text.numberOfLines = 0
+        text.numberOfLines = 5
         return text
     }()
     
@@ -54,7 +54,7 @@ final class CharactersDetailCell: UITableViewCell, CodeView, Reusable {
         
         self.titleLabel.snp.makeConstraints { make in
             make.left.right.top.equalTo(self.content).offset(16)
-            make.bottom.equalTo(txtLabel.snp.bottom).offset(8)
+            make.bottom.equalTo(txtLabel.snp.bottom).offset(-8)
         }
         
         self.txtLabel.snp.makeConstraints { make in

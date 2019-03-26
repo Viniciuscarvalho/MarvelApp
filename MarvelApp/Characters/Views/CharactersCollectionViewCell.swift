@@ -128,14 +128,13 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusab
         layer.masksToBounds = false
     }
     
-    //Favorite functions
     func favoriteAction(character: Character) {
         let id = "F\(character.id)"
         
         DispatchQueue.main.async {
             if let status = UserDefaults.standard.value(forKey: id) as? Bool {
                 if status {
-                    self.favorite.setImage(Assets.favoriteFull.image, for: .normal)
+                    self.favorite.setBackgroundImage(Assets.favoriteFull.image, for: .normal)
                 }
             }
         }
