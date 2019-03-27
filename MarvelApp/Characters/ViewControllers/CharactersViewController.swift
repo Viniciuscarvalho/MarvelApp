@@ -17,8 +17,10 @@ final class CharactersViewController: UIViewController {
     
     var currentPage = 0
     
+    var isLoadCharacters: Bool = false
+    
     weak var delegate: CharactersViewControllerDelegate?
-    private var viewModel: CharactersViewModelProtocol
+    private var viewModel: CharactersViewModel
     let favoriteRepository: FavoritedCharacterRepository
     
     private var charactersCollectionView = CharactersCollectionView()
@@ -89,7 +91,7 @@ extension CharactersViewController: UICollectionViewDataSource {
     }
     
     fileprivate func nextPage(index: Int) {
-        self.viewModel.fetchCharacters()
+        //self.viewModel.fetchCharacters()
     }
 }
 

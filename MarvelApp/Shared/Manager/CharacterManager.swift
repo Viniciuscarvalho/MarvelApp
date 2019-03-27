@@ -21,6 +21,8 @@ class CharactersManager {
     private var pageSize = 20
     private var total = 0
     
+    var isLoadCharacters: Bool = false
+    
     private let pathForResource = "/v1/public/characters"
     
     init(delegate: CharactersManagerDelegate) {
@@ -52,10 +54,12 @@ class CharactersManager {
     }
     
     func fetchCharactersData() {
-        guard (self.total / pageSize) <= page else { return }
+        guard (self.total / pageSize) <= page, !isLoadCharacters else { return }
+        isLoadCharacters = true
         
         let request = Endpoints(path: self.pathForResource, params: getParams())
         APIClient<MarvelApp.Character>.get(request) { result in
+            self.isLoadCharacters = false
             switch result {
             case .success(let value):
                 guard let value = value as? PayloadRequest<MarvelApp.Character> else {

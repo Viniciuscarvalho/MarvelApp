@@ -171,6 +171,8 @@
 		2F031FC02088D6D000824197 /* Essentials */ = {
 			isa = PBXGroup;
 			children = (
+				EA7B400D2088122F007BD37B /* Main.storyboard */,
+				EA7B401520881233007BD37B /* LaunchScreen.storyboard */,
 				EA7B401820881233007BD37B /* Info.plist */,
 				EA7B401320881233007BD37B /* Assets.xcassets */,
 				EA7B40092088122F007BD37B /* AppDelegate.swift */,
@@ -337,7 +339,6 @@
 			children = (
 				2F031FBD2088D4B400824197 /* Characters */,
 				2F031FBC2088D4B400824197 /* CharactersDetail */,
-				EA7B402E20881733007BD37B /* Storyboard */,
 				EA7B402C20881261007BD37B /* Shared */,
 			);
 			path = MarvelApp;
@@ -368,15 +369,6 @@
 				EA7B403020881754007BD37B /* Extensions */,
 			);
 			path = Shared;
-			sourceTree = "<group>";
-		};
-		EA7B402E20881733007BD37B /* Storyboard */ = {
-			isa = PBXGroup;
-			children = (
-				EA7B401520881233007BD37B /* LaunchScreen.storyboard */,
-				EA7B400D2088122F007BD37B /* Main.storyboard */,
-			);
-			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		EA7B403020881754007BD37B /* Extensions */ = {
