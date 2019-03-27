@@ -29,7 +29,7 @@ class CharactersDetailViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        charactersDetailView.setup(character: viewModelDetail.character)
+        charactersDetailView.setup(character: viewModelDetail.character, isFavorited: favoriteRepository.isFavorited(character: viewModelDetail.character))
         let backButton = UIBarButtonItem()
         backButton.title = "Back"
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
@@ -51,10 +51,6 @@ class CharactersDetailViewController: UIViewController, UITableViewDelegate {
 extension CharactersDetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModelDetail.output.count
-    }
-    
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -92,15 +88,9 @@ extension CharactersDetailViewController: UITableViewDataSource {
 }
 
 extension CharactersDetailViewController: FavoriteDelegate {
-    
-    func save(character: Character?) -> Bool {
-//        let character = viewModelDetail.output["Character"]?.first as? Character
+    func save(character: Character?) {
         guard let item = character else { return }
-        
         favoriteRepository.toggleFavorite(character: item)
-//        setFavorite(status: favoriteRepository.isFavorited(character: item))
-        
-        return favoriteRepository.isFavorited(character: item)
     }
     
 }

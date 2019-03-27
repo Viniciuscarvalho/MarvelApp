@@ -15,13 +15,9 @@ protocol CharactersViewControllerDelegate: class {
 
 final class CharactersViewController: UIViewController {
     
-    fileprivate var originFrame: CGRect?
-    fileprivate var originImage: UIImage?
-    
     var currentPage = 0
     
     weak var delegate: CharactersViewControllerDelegate?
-    
     private var viewModel: CharactersViewModelProtocol
     let favoriteRepository: FavoritedCharacterRepository
     
@@ -72,9 +68,7 @@ final class CharactersViewController: UIViewController {
 extension CharactersViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        let total = self.viewModel.countCharacters()
-        
-        return total
+        return self.viewModel.countCharacters()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -83,7 +77,7 @@ extension CharactersViewController: UICollectionViewDataSource {
         cell.saveDelegate = self
 
         if let character = self.viewModel.character(index: indexPath.row) {
-            cell.setup(character: character, viewModel: self.viewModel)
+            cell.setup(character: character, isFavorited: favoriteRepository.isFavorited(character: character))
         }
         return cell
     }
@@ -128,10 +122,9 @@ extension CharactersViewController: CharactersViewModelLoadable {
 
 extension CharactersViewController: FavoriteDelegate {
     func save(character: Character?) {
-        guard let item = character else { return }
+        guard let item = character else { return}
         favoriteRepository.toggleFavorite(character: item)
-        
-        return favoriteRepository.isFavorited(character: item)
+        charactersCollectionView.collectionView.reloadData()
     }
 }
 

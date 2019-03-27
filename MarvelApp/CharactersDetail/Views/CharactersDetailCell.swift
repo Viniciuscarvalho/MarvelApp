@@ -22,12 +22,6 @@ final class CharactersDetailCell: UITableViewCell, CodeView, Reusable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //Build elements on view
-    private let content: UIView = {
-        let view = UIView()
-        return view
-    }()
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -42,23 +36,18 @@ final class CharactersDetailCell: UITableViewCell, CodeView, Reusable {
     }()
     
     func buildHierarchy() {
-        addSubview(content)
-        content.addSubview(titleLabel)
-        content.addSubview(txtLabel)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(txtLabel)
     }
     
     func buildConstraints() {
-        self.content.snp.makeConstraints { make in
-            make.edges.equalTo(self)
-        }
-        
         self.titleLabel.snp.makeConstraints { make in
-            make.left.right.top.equalTo(self.content).offset(16)
-            make.bottom.equalTo(txtLabel.snp.bottom).offset(-8)
+            make.left.right.top.equalTo(contentView).offset(16)
         }
         
         self.txtLabel.snp.makeConstraints { make in
-            make.left.right.bottom.equalTo(self.content).offset(16)
+            make.top.equalTo(titleLabel.snp.bottom).offset(16)
+            make.left.bottom.right.equalTo(contentView).offset(16)
         }
     }
     

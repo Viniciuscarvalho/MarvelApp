@@ -11,7 +11,7 @@ import SnapKit
 import Reusable
 
 protocol FavoriteDelegate: class {
-    func save(character: Character?) -> Bool
+    func save(character: Character?)
 }
 
 final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusable {
@@ -20,6 +20,17 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusab
     private var viewModel: CharactersViewModelProtocol?
     
     weak var saveDelegate: FavoriteDelegate?
+    
+    override init(frame: CGRect = .zero) {
+        super.init(frame: frame)
+        installFavoriteAction()
+        buildHierarchy()
+        buildConstraints()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //Build elements on view
     private let content: UIView = {
@@ -54,22 +65,10 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusab
     
     private let favorite: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
-        button.tintColor = .gray
+        button.setBackgroundImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
         button.addTarget(self, action: #selector(didTouchAtFavorite), for: .touchUpInside)
         return button
     }()
-    
-    override init(frame: CGRect = .zero) {
-        super.init(frame: frame)
-        installFavoriteAction()
-        buildHierarchy()
-        buildConstraints()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -113,7 +112,7 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusab
         }
         
         self.favorite.snp.makeConstraints { make in
-            make.width.equalTo(Metric.large)
+            make.width.equalTo(Metric.extraLarge)
             make.right.equalTo(content.self).inset(Metric.small)
             make.centerY.equalTo(name.snp.centerY)
         }
@@ -132,20 +131,24 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusab
     }
     
     @objc private func didTouchAtFavorite() {
-        if let saveResult = saveDelegate?.save(character: character) {
-            setFavorite(status: saveResult)
-        }
+        saveDelegate?.save(character: character)
     }
     
-    func setup(character: Character, viewModel: CharactersViewModelProtocol? = nil) {
+    func setup(character: Character, isFavorited: Bool) {
         self.character = character
-        self.viewModel = viewModel
         
         self.name.text = character.name
         self.name.font = UIFont(name: "Avenir", size: 16)
         if let path = character.thumbnail?.path, let ext = character.thumbnail?.extension {
             self.photo.imageFromServerURL(urlString: "\(path).\(ext)")
         }
+        
+        if isFavorited {
+            favorite.setBackgroundImage(Assets.favoriteFull.image, for: .normal)
+        } else {
+            favorite.setBackgroundImage(Assets.favoriteEmpty.image, for: .normal)
+        }
+        
     }
     
     public func image() -> UIImage? {

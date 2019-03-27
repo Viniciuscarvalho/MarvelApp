@@ -11,6 +11,7 @@ import Foundation
 struct FavoritedCharacterRepository {
     
     let provider: FavoritedCharacterProvider
+    
     init(provider: FavoritedCharacterProvider = FavoritedCharacterProvider()) {
         self.provider = provider
     }

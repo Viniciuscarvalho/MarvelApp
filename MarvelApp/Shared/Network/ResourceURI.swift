@@ -21,9 +21,7 @@ extension ResourceURI {
         let request = Endpoints(path: self.resourceURI, params: [:])
         
         APIClient<Self>.get(request) { result in
-            
             switch result {
-            
             case .success(let value):
                 weak var weakSelf = self
                 guard let value = value as? PayloadRequest<Self>,

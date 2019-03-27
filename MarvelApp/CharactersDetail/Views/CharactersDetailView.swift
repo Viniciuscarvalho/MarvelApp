@@ -34,6 +34,7 @@ class CharactersDetailView: UIView, CodeView {
     lazy var tableView: UITableView = {
         let table = UITableView()
         table.separatorStyle = .none
+        table.allowsSelection = false
         return table
     }()
     
@@ -47,7 +48,6 @@ class CharactersDetailView: UIView, CodeView {
     lazy var favorite: UIButton = {
         let button = UIButton(type: .system)
         button.setBackgroundImage(#imageLiteral(resourceName: "favorite_gray_icon"), for: .normal)
-        button.tintColor = .gray
         button.addTarget(self, action: #selector(didTouchAtFavorite), for: .touchUpInside)
         return button
     }()
@@ -87,24 +87,20 @@ class CharactersDetailView: UIView, CodeView {
     }
     
     @objc private func didTouchAtFavorite() {
-        if let saveResult = saveDelegate?.save(character: character) {
-            setFavorite(status: saveResult)
-        }
+        saveDelegate?.save(character: character)
     }
     
-    func setFavorite(status: Bool) {
-        if status == true {
-            favorite.setBackgroundImage(Assets.favoriteFull.image, for: .normal)
-        } else {
-            favorite.setBackgroundImage(Assets.favoriteEmpty.image, for: .normal)
-        }
-    }
-    
-    func setup(character: Character) {
+    func setup(character: Character, isFavorited: Bool) {
         self.character = character
         
         if let path = character.thumbnail?.path, let ext = character.thumbnail?.extension {
             self.photo.imageFromServerURL(urlString: "\(path).\(ext)")
+        }
+        
+        if isFavorited {
+            favorite.setBackgroundImage(Assets.favoriteFull.image, for: .normal)
+        } else {
+            favorite.setBackgroundImage(Assets.favoriteEmpty.image, for: .normal)
         }
     }
     
