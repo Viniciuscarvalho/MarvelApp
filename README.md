@@ -2,7 +2,7 @@
 
 This application is intended to list Super Heroes being presented on [Marvel API](https://developer.marvel.com/)
 
-##Branch feature/view-code
+## Branch feature/view-code
 The branch `feature / view-code` is implemented using the `SnapKit` framework for assembly of the screens, without the use of `Storyboard` or Xib, in addition to the implementation with Reusable to make the best use and less code to identify the cells.
 
 ### Third party frameworks
