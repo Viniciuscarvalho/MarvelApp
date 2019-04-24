@@ -18,9 +18,9 @@ extension ResourceURI {
     public func load(callback: @escaping (Bool) -> Void) {
         guard isLoaded() == false else { callback(true) ; return }
         
-        let request = Endpoints(path: self.resourceURI, params: [:])
+        let request = ServiceSetup(path: self.resourceURI, params: [:])
         
-        APIClient<Self>.get(request) { result in
+        APIService<Self>.requestData(request) { result in
             switch result {
             case .success(let value):
                 weak var weakSelf = self

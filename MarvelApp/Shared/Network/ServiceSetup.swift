@@ -14,7 +14,7 @@ extension Date {
     }
 }
 
-struct Endpoints {
+struct ServiceSetup {
     var path: String
     let params: [String: String]
     let baseURL = "https://gateway.marvel.com:443"
@@ -23,7 +23,7 @@ struct Endpoints {
     let timeStamp = "\(Date().toMillis())"
 }
 
-extension Endpoints {
+extension ServiceSetup {
     
     fileprivate func generateParams() -> String {
         var newParams = self.params

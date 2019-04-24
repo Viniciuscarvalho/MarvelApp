@@ -134,12 +134,12 @@ final class CharactersCollectionViewCell: UICollectionViewCell, CodeView, Reusab
         saveDelegate?.save(character: character)
     }
     
-    func setup(character: Character, isFavorited: Bool) {
-        self.character = character
+    func setup(viewModel: CharactersViewModel, isFavorited: Bool) {
+        self.charactersViewModel = viewModel
         
-        self.name.text = character.name
+        self.name.text = viewModel.name
         self.name.font = UIFont(name: "Avenir", size: 16)
-        if let path = character.thumbnail?.path, let ext = character.thumbnail?.extension {
+        if let path = viewModel.thumbnail?.path, let ext = charactersViewModel.thumbnail?.extension {
             self.photo.imageFromServerURL(urlString: "\(path).\(ext)")
         }
         

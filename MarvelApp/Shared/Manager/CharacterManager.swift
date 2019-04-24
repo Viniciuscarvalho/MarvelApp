@@ -8,15 +8,16 @@
 
 import Foundation
 
-protocol CharactersManagerDelegate: class {
-    func finishLoadPage(data: [Character]?, error: Error?)
-    func searchResult(data: [Character]?, error: Error?)
+protocol CharactersManagerProtocol {
+    func fetchCharactersData(completion: @escaping (Result<[Character]>) -> Void)
+    func searchCharacters(name: String)
 }
 
-class CharactersManager {
-    
-    weak var delegate: CharactersManagerDelegate?
+class CharactersManager: CharactersManagerProtocol {
+
+    private let client: ClientProtocol
     private var characters: [Any]?
+    
     private var page = 0
     private var pageSize = 20
     private var total = 0
@@ -25,8 +26,8 @@ class CharactersManager {
     
     private let pathForResource = "/v1/public/characters"
     
-    init(delegate: CharactersManagerDelegate) {
-        self.delegate = delegate
+    init(client: ClientProtocol) {
+        self.client = client
     }
     
     fileprivate func getParams() -> [String: String] {
@@ -34,44 +35,47 @@ class CharactersManager {
         return params
     }
     
-    func doSearch(name: String) {
-        let request = Endpoints(path: self.pathForResource, params: ["name": name])
-        APIClient<Character>.get(request) { result in
+    func searchCharacters(name: String) {
+        let request = ServiceSetup(path: self.pathForResource, params: ["name": name])
+        client.requestData(with: request) { result in
             switch result {
             case .success(let value):
                 guard let value = value as? PayloadRequest<Character> else { return }
-                self.delegate?.searchResult(data: value.data.results, error: nil)
-            case .error(let error):
-                self.delegate?.searchResult(data: nil, error: error)
+                self.delegate?.presentResultSearch(data: value.data.results)
+            case .error(error: ServiceError):
+                
             }
         }
     }
     
-    func resetSearch() {
-        characters = nil
-        page = 0
-        total = 0
-    }
-    
-    func fetchCharactersData() {
+    func fetchCharactersData(completion: @escaping (Result<[Character]>) -> Void) {
         guard (self.total / pageSize) <= page, !isLoadCharacters else { return }
         isLoadCharacters = true
         
-        let request = Endpoints(path: self.pathForResource, params: getParams())
-        APIClient<MarvelApp.Character>.get(request) { result in
+        let request = ServiceSetup(path: self.pathForResource, params: getParams())
+        client.requestData(with: request) { result in
             self.isLoadCharacters = false
             switch result {
-            case .success(let value):
-                guard let value = value as? PayloadRequest<MarvelApp.Character> else {
-                    self.delegate?.finishLoadPage(data: nil, error: nil)
-                    return
+            case let .success(data):
+                do {
+                    let decoder = JSONDecoder()
+                    let charactersList = try decoder.decode([Character].self, from: data)
+                    completion(.success(charactersList))
+                } catch {
+                    completion(.failure(.couldNotParseObject))
                 }
-                self.total = value.data.count
-                self.delegate?.finishLoadPage(data: value.data.results, error: nil)
+//                guard let value = value as? PayloadRequest<MarvelApp.Character> else {
+//                    self.presenter.
+//                    return
+//                }
+                self.total = data.count
+                presenter.presentCharactersList(characters: data.results)
                 self.page += 1
-            case .error(let error):
-                self.delegate?.finishLoadPage(data: nil, error: error)
+            case let .failure(error):
+                completion(.failure(error))
             }
         }
     }
 }
+
+

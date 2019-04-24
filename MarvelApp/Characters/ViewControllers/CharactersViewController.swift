@@ -13,7 +13,12 @@ protocol CharactersViewControllerDelegate: class {
     func charactersViewControllerDidSelectHero(_ selectedHero: Character)
 }
 
-final class CharactersViewController: UIViewController {
+protocol CharactersDisplayProtocol: class {
+    func displayCharacters(viewModel: CharactersViewModel)
+    func displayError(message: String)
+}
+
+class CharactersViewController: UIViewController {
     
     var currentPage = 0
     

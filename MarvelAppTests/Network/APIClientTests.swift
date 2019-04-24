@@ -19,14 +19,14 @@ class APIClientTests: XCTestCase {
     let testMD5String = "CY9rzUYh03PK3k6DJie09g=="
     
     func testFunctionForMD5() {
-        let client = APIClient<T>()
+        let client = APIService<T>()
         XCTAssert(client.MD5(string: "test").base64EncodedString() == self.testMD5String)
     }
     
     func testAPIClientError() {
-        let client = Endpoints(path: "@", params: [:])
+        let client = ServiceSetup(path: "@", params: [:])
         let exp = self.expectation(description: "ErrorOnLoad")
-        APIClient<Serie>.get(client) { result in
+        APIService<Serie>.get(client) { result in
             switch result {
             case .success(_):
                 XCTAssert(false)
