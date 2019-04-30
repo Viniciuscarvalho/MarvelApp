@@ -11,6 +11,7 @@ import Foundation
 protocol CharactersManagerProtocol {
     func fetchCharactersData(completion: @escaping (Result<[Character]>) -> Void)
     func searchCharacters(name: String)
+    func resetSearch()
 }
 
 class CharactersManager: CharactersManagerProtocol {
@@ -35,15 +36,21 @@ class CharactersManager: CharactersManagerProtocol {
         return params
     }
     
+    func resetSearch() {
+        characters = nil
+        page = 0
+        total = 0
+    }
+    
     func searchCharacters(name: String) {
         let request = ServiceSetup(path: self.pathForResource, params: ["name": name])
         client.requestData(with: request) { result in
             switch result {
             case .success(let value):
-                guard let value = value as? PayloadRequest<Character> else { return }
-                self.delegate?.presentResultSearch(data: value.data.results)
-            case .error(error: ServiceError):
-                
+                    guard let value = value as? PayloadRequest<Character> else { return }
+                    presentResultSearch(data: value.data.results)
+            case .failure(error):
+                completion(.failure(error))
             }
         }
     }
@@ -64,13 +71,10 @@ class CharactersManager: CharactersManagerProtocol {
                 } catch {
                     completion(.failure(.couldNotParseObject))
                 }
-//                guard let value = value as? PayloadRequest<MarvelApp.Character> else {
-//                    self.presenter.
-//                    return
-//                }
+                
                 self.total = data.count
-                presenter.presentCharactersList(characters: data.results)
                 self.page += 1
+                
             case let .failure(error):
                 completion(.failure(error))
             }

@@ -35,6 +35,7 @@ class CharactersInteractor: CharactersInteractorProtocol {
         }
     }
     
+    
     func listCharacters() {
         manager?.fetchCharactersData { [weak self] (result) in
             guard let interactor = self else { return }
@@ -50,7 +51,6 @@ class CharactersInteractor: CharactersInteractorProtocol {
         searchHeroes.count
         
         return searchHeroes[index]
-        
     }
     
     func countCharacters() -> Int {
